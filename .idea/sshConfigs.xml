@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="s2010456035.kwmhgb.at" id="21c29dc4-56de-4ce3-8cf5-49cb8e22d1b6" port="222" nameFormat="DESCRIPTIVE" username="sstud31" useOpenSSHConfig="true" />
+    </configs>
+  </component>
+</project>

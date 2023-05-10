@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="85cf8e6e-f407-40d7-a26d-394beadd61f5" name="HETZNER" url="http://padlet23.s2010456035.kwmhgb.at/">
+        <fileTransfer rootFolder="/usr/home/sstud31/public_html/padlet23/bookstoreServer" accessType="SFTP" host="s2010456035.kwmhgb.at" port="222" sshConfigId="21c29dc4-56de-4ce3-8cf5-49cb8e22d1b6" sshConfig="sstud31@s2010456035.kwmhgb.at:222 password">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" keepAliveTimeout="0" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
