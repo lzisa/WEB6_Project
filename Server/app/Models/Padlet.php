@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Padlet extends Model
 {
-    protected $fillable =['title', 'statusprivate', 'user_id'];
+    protected $fillable =['title', 'is_public', 'user_id'];
 
 
-    public function isPrivate(){
-        return $this->statusprivate;
+
+    public function isPublic(){
+        return $this->isPublic();
     }
 
     public function entries(): HasMany{

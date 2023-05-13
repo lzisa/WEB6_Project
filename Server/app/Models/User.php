@@ -46,4 +46,14 @@ class User extends Authenticatable
     public function padlets(): HasMany{
         return $this->hasMany(Padlet::class);
     }
+
+    public function entries(): HasMany{
+        return $this->hasMany(Entry::class);
+    }
+    public function comments(): HasMany{
+        return $this->hasMany(Comment::class);
+    }
+    public function ratings(): HasMany{
+        return $this->hasMany(Rating::class);
+    }
 }

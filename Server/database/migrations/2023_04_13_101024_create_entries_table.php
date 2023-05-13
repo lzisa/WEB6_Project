@@ -17,7 +17,10 @@ return new class extends Migration {
             $table->timestamps();
             $table->string('text');
             $table->foreignId('padlet_id')->constrained()->onDelete('cascade');
-         /*   $table->bigInteger('padlet_id')->unsigned();
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('title')->default('title');
+
+            /*   $table->bigInteger('padlet_id')->unsigned();
             $table->foreign('padlet_id')
                 ->references('id')
                 ->on('padlets')
