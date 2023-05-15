@@ -46,13 +46,21 @@ class PadletsTableSeeder extends Seeder
         $comment1 = new Comment();
         $comment1->text="Ich kommentiere";
         $comment1->user()->associate($user);
+
+
         $entry2->comment()->saveMany([$comment1]);
         $padlet->save();
 
         $rating = new Rating();
         $rating->rating=4;
         $rating->user()->associate($user);
-        $entry2->rating()->saveMany([$rating]);
+
+
+        $rating2 = new Rating();
+        $rating2->rating=2;
+        $rating2->user()->associate($user);
+
+        $entry2->rating()->saveMany([$rating, $rating2]);
         $padlet->save();
 
         $padlet2 = new Padlet();

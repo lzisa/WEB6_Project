@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Entry;
 use App\Models\Padlet;
+use App\Models\Rating;
 use App\Models\Userright;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -41,6 +42,16 @@ class EntryController extends Controller
                     ]
                 );
             }
+
+        /*    if (isset($request['rating']) && is_array($request['rating'])) {
+                foreach ($request['rating'] as $r) {
+                    $rating = Rating::firstOrNew([
+                        'rating' => $r['rating'],
+                        'user_id'=>$r['user_id']]);
+                    $rating->entry()->save($rating);
+                }
+            }*/
+
             DB::commit();
             return response()->json($entry, 200);
 
@@ -86,4 +97,9 @@ class EntryController extends Controller
     }
 
 
+    public function findById(string $id)
+    {
+        $entry = Entry::where('id', $id)->first();
+        return $entry != null ? response()->json($entry, 200) : response()->json(false, 200);
+    }
 }

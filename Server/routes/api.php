@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\PadletController;
+use App\Http\Controllers\RatingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,7 +34,11 @@ Route::get('entries', [EntryController::class, 'index']);
 Route::get('padlets/{padlet_id}/entries', [EntryController::class, 'getEntriesOfPadlet']);
 Route::post('padlets/{padlet_id}/entries', [EntryController::class, 'save']);
 Route::put('padlets/{padlet_id}/entries/{entry_id}', [EntryController::class, 'update']);
+Route::get('padlets/{padlet_id}/entries/{entry_id}', [EntryController::class, 'findById']);
 
+
+Route::get('padlets/{padlet_id}/entries/{entry_id}/ratings', [RatingController::class, 'index']);
+Route::get('ratings', [RatingController::class, 'index']);
 /*
 Route::get('/', function (){
     $padlets = DB::table('padlets')->get();
