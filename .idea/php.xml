@@ -129,6 +129,7 @@
       <path value="$PROJECT_DIR$/Server/vendor/symfony/uid" />
       <path value="$PROJECT_DIR$/Server/vendor/symfony/polyfill-intl-idn" />
       <path value="$PROJECT_DIR$/Server/vendor/symfony/polyfill-php80" />
+      <path value="$PROJECT_DIR$/Server/vendor/barryvdh/laravel-cors" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

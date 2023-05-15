@@ -6,6 +6,7 @@ use App\Models\Comment;
 use App\Models\Entry;
 use App\Models\Padlet;
 use App\Models\Rating;
+use App\Models\Userright;
 use http\Client\Curl\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -54,6 +55,24 @@ class PadletsTableSeeder extends Seeder
         $entry2->rating()->saveMany([$rating]);
         $padlet->save();
 
+        $padlet2 = new Padlet();
+        $padlet2->title = "Dies ist ein neues Padlet";
+
+        $padlet2->user()->associate($user);
+        $padlet2->is_public = false;
+
+        $padlet2->save();
         //comment for VCS
+
+        $right = new Userright();
+        $right->user()->associate($user);
+        $right->padlet()->associate($padlet);
+        $right->edit=true;
+        $right->save();
+
+        $right2 = new Userright();
+        $right2->user()->associate($user);
+        $right2->padlet()->associate($padlet2);
+        $right2->save();
     }
 }

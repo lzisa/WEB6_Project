@@ -11,7 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Entry extends Model
 {
     use HasFactory;
-    protected $fillable = ['text', 'user_id'];
+    protected $fillable = ['text', 'user_id', 'padlet_id', 'title'];
 
 
     public function padlet(): BelongsTo{

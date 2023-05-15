@@ -2,6 +2,8 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\EntryController;
+use App\Http\Controllers\PadletController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,6 +20,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+Route::get('padlets', [PadletController::class, 'index']);
+Route::get('padlets/{padlet_id}', [PadletController::class, 'findByID']);
+Route::get('padlets/checkByID/{padlet_id}', [PadletController::class, 'checkByID']);
+
+
+Route::post('padlets', [PadletController::class, 'save']);
+Route::put('padlets/{padlet_id}', [PadletController::class, 'update']);
+Route::delete('padlets/{padlet_id}', [PadletController::class, 'delete']);
+
+Route::get('entries', [EntryController::class, 'index']);
+Route::get('padlets/{padlet_id}/entries', [EntryController::class, 'getEntriesOfPadlet']);
+Route::post('padlets/{padlet_id}/entries', [EntryController::class, 'save']);
+Route::put('padlets/{padlet_id}/entries/{entry_id}', [EntryController::class, 'update']);
+
+/*
 Route::get('/', function (){
     $padlets = DB::table('padlets')->get();
     return $padlets;
@@ -35,3 +52,4 @@ Route::get('/padlets/{id}', function ($id) {
     return $padlet;
     //return view('padlets.show', compact('padlet'));
 });
+*/
