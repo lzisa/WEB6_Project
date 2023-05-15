@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntryController;
 use App\Http\Controllers\PadletController;
 use App\Http\Controllers\RatingController;
+use App\Http\Controllers\CommentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,7 +39,12 @@ Route::get('padlets/{padlet_id}/entries/{entry_id}', [EntryController::class, 'f
 
 
 Route::get('padlets/{padlet_id}/entries/{entry_id}/ratings', [RatingController::class, 'index']);
+Route::post('padlets/{padlet_id}/entries/{entry_id}/ratings', [RatingController::class, 'save']);
 Route::get('ratings', [RatingController::class, 'index']);
+
+
+Route::get('padlets/{padlet_id}/entries/{entry_id}/comments', [CommentController::class, 'index']);
+Route::post('padlets/{padlet_id}/entries/{entry_id}/comments', [CommentController::class, 'save']);
 /*
 Route::get('/', function (){
     $padlets = DB::table('padlets')->get();
