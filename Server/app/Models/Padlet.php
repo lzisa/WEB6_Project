@@ -28,4 +28,8 @@ class Padlet extends Model
     public function userright(): HasMany{
         return $this->HasMany(Userright::class);
     }
+
+    public function findOwner(){
+        return $this->user();
+    }
 }

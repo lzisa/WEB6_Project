@@ -112,6 +112,11 @@ class PadletController extends Controller
         return $padlet != null ? response()->json($padlet, 200) : response()->json(false, 200);
     }
 
+    public function findOwner(string $id)
+    {
+        $padlet = Padlet::where('id', $id)->first();
+        return response()->json(['user_id'=>$padlet->user_id], 200);
+    }
 
     public function checkByID(string $id)
     {

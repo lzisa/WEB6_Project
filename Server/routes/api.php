@@ -21,46 +21,37 @@ use App\Http\Controllers\CommentController;
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
-
+//padlets
 Route::get('padlets', [PadletController::class, 'index']);
 Route::get('padlets/{padlet_id}', [PadletController::class, 'findByID']);
 Route::get('padlets/checkByID/{padlet_id}', [PadletController::class, 'checkByID']);
-
-
 Route::post('padlets', [PadletController::class, 'save']);
 Route::put('padlets/{padlet_id}', [PadletController::class, 'update']);
 Route::delete('padlets/{padlet_id}', [PadletController::class, 'delete']);
 
+//entries
 Route::get('entries', [EntryController::class, 'index']);
 Route::get('padlets/{padlet_id}/entries', [EntryController::class, 'getEntriesOfPadlet']);
 Route::post('padlets/{padlet_id}/entries', [EntryController::class, 'save']);
 Route::put('padlets/{padlet_id}/entries/{entry_id}', [EntryController::class, 'update']);
 Route::get('padlets/{padlet_id}/entries/{entry_id}', [EntryController::class, 'findById']);
 
-
-Route::get('padlets/{padlet_id}/entries/{entry_id}/ratings', [RatingController::class, 'index']);
-Route::post('padlets/{padlet_id}/entries/{entry_id}/ratings', [RatingController::class, 'save']);
+//ratings
+Route::get('padlets/{padlet_id}/entries/{entry_id}/ratings', [RatingController::class, 'getRatingsOfEntry']);
 Route::get('ratings', [RatingController::class, 'index']);
+Route::post('padlets/{padlet_id}/entries/{entry_id}/ratings', [RatingController::class, 'save']);
+Route::put('padlets/{padlet_id}/entries/{entry_id}/ratings/{rating_id}', [RatingController::class, 'update']);
+Route::delete('padlets/{padlet_id}/entries/{entry_id}/ratings/{rating_id}', [RatingController::class, 'delete']);
 
-
+//comments
 Route::get('padlets/{padlet_id}/entries/{entry_id}/comments', [CommentController::class, 'index']);
+Route::get('padlets/{padlet_id}/entries/{entry_id}/comments/{comment_id}', [CommentController::class, 'findById']);
 Route::post('padlets/{padlet_id}/entries/{entry_id}/comments', [CommentController::class, 'save']);
-/*
-Route::get('/', function (){
-    $padlets = DB::table('padlets')->get();
-    return $padlets;
-});
+Route::delete('padlets/{padlet_id}/entries/{entry_id}/comments/{comment_id}', [CommentController::class, 'delete']);
+Route::put('padlets/{padlet_id}/entries/{entry_id}/comments/{comment_id}', [CommentController::class, 'update']);
 
-Route::get('/padlets', function () {
-    $padlets = Padlet::all();
-    return $padlets;
-    //return view('padlets.index', compact('padlets'));
-    //return view('home');
-});
-Route::get('/padlets/{id}', function ($id) {
-    //$padlet = \Illuminate\Support\Facades\DB::table('padlets')->find($id);
-    $padlet=Padlet::find($id);
-    return $padlet;
-    //return view('padlets.show', compact('padlet'));
-});
-*/
+//find owner of padlet
+Route::get('padlets/{padlet_id}/user_id', [PadletController::class, 'findOwner']);
+
+//userrights
+
