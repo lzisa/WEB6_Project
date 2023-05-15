@@ -20,7 +20,6 @@ class EntryController extends Controller
 
     public function getEntriesOfPadlet(string $padlet_id): JsonResponse
     {
-
         $entries = Entry::where('padlet_id', $padlet_id)->with(['comment', 'user', 'rating'])->get();
         return $entries != null ? response()->json($entries, 200) : response()->json(false, 200);
     }

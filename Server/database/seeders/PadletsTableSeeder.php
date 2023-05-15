@@ -51,6 +51,11 @@ class PadletsTableSeeder extends Seeder
         $entry2->comment()->saveMany([$comment1]);
         $padlet->save();
 
+        $entry3 = new Entry();
+        $entry3->text="Dies ist die Beschreibung für Eintrag 3";
+        $entry3->user()->associate($user);
+
+
         $rating = new Rating();
         $rating->rating=4;
         $rating->user()->associate($user);
@@ -68,9 +73,11 @@ class PadletsTableSeeder extends Seeder
 
         $padlet2->user()->associate($user);
         $padlet2->is_public = false;
-
         $padlet2->save();
-        //comment for VCS
+
+        $padlet2->entries()->saveMany([$entry3]);
+        $padlet2->save();
+
 
         $right = new Userright();
         $right->user()->associate($user);
