@@ -1,5 +1,39 @@
-<p>padlet-detail works!</p>
-<div *ngIf="padlet">
-  <div>{{padlet.title}}</div>
-  <button class="btn btn-primary"[routerLink]="'/padlets'" >zurück zur Padletliste</button>
+<header class="bg-white shadow" *ngIf="padlet">
+  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{padlet.title}}
+      <!-- The button to open modal -->
+      <label for="my-modal-6" class="btn">Edit</label>
+      <button class="btn bg-primary" (click)="removePadlet()">Delete</button>
+    </h1>
+
+    <p>by {{padlet.user_id}}</p>
+  </div>
+</header>
+<main>
+  <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+    <div class="card w-96 bg-base-100 shadow-xl"  *ngFor="let entry of entries" >
+      <div class="card-body">
+        <h2 class="card-title">{{entry.title}}</h2>
+        <p>{{entry.text}}</p>
+        <div class="card-actions justify-end">
+          <button class="btn">Edit</button>
+        </div>
+      </div>
+    </div>
+    <button class="btn" [routerLink]="'/padlets'">zurück zur Padletliste</button>
+  </div>
+
+</main>
+<!-- Edit Padlet-->
+<input type="checkbox" id="my-modal-6" class="modal-toggle" />
+<div class="modal modal-bottom sm:modal-middle">
+  <div class="modal-box">
+    <h3 class="font-bold text-lg">New Padlet Name</h3>
+    <form (ngSubmit)="submitForm()">
+      <input type="text" placeholder="{{padlet.title}}" class="input input-bordered input-primary w-full max-w-xs" />
+    </form>
+    <button class="modal-action" (click)="updatePadlet">
+      <label for="my-modal-6" class="btn">Speichern</label>
+    </button>
+  </div>
 </div>

@@ -1,5 +1,6 @@
 import {Entry} from "./entry";
 export {Entry} from "./entry";
+
 export class Padlet {
   constructor(
     public id: number,

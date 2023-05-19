@@ -62,23 +62,20 @@ class EntryController extends Controller
     }
 
 // Update Entry
-    public function update(Request $request, string $id): JsonResponse
+    public function update(Request $request, string $padlet_id, $entry_id): JsonResponse
     {
         DB::beginTransaction();
         try {
             $entry = Entry::with(['comment', 'user', 'rating'])
-                ->where('id', $id)->first();
+                ->where('id', $entry_id)->first();
             if ($entry != null) {
                 $request = $this->parseRequest($request);
                 $entry->update($request->all());
-
-                //delete all old entries
-                // $entry->entries()->delete();
                 $entry->save();
             }
             DB::commit();
             $entry1 = Entry::with(['comment', 'user', 'rating'])
-                ->where('id', $id)->first(); // return a vaild http response
+                ->where('id', $entry_id)->first(); // return a vaild http response
             return response()->json($entry1, 201);
         } catch (\Exception $e) {
             // rollback all queries
@@ -96,9 +93,9 @@ class EntryController extends Controller
     }
 
 
-    public function findById(string $id)
+    public function findById(string $padlet_id, $entry_id)
     {
-        $entry = Entry::where('id', $id)->first();
+        $entry = Entry::where('id', $entry_id)->first();
         return $entry != null ? response()->json($entry, 200) : response()->json(false, 200);
     }
 }

@@ -3,12 +3,16 @@ import {RouterModule, Routes} from '@angular/router';
 import {PadletListComponent} from "./padlet-list/padlet-list.component";
 import {HomeComponent} from "./home/home.component";
 import {PadletDetailComponent} from "./padlet-detail/padlet-detail.component";
+import {PadletFormComponent} from "./padlet-form/padlet-form.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
   {path: 'home', component: HomeComponent},
   {path: 'padlets', component: PadletListComponent},
-  {path: 'padlets/:id', component: PadletDetailComponent}
+  {path: 'padlets/:id', component: PadletDetailComponent},
+  {path: 'padlets/:id/entries/:id', component: PadletDetailComponent},
+
+
 ];
 
 @NgModule({

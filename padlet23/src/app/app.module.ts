@@ -9,6 +9,9 @@ import { PadletDetailComponent } from './padlet-detail/padlet-detail.component';
 import { EntryListComponent } from './entry-list/entry-list.component';
 import {PadletStoreService} from "./shared/padlet-store.service";
 import { HomeComponent } from './home/home.component';
+import {HttpClientModule} from "@angular/common/http";
+import {FormsModule} from "@angular/forms";
+import { PadletFormComponent } from './padlet-form/padlet-form.component';
 
 @NgModule({
   declarations: [
@@ -17,12 +20,16 @@ import { HomeComponent } from './home/home.component';
     PadletListItemComponent,
     PadletDetailComponent,
     EntryListComponent,
-    HomeComponent
+    HomeComponent,
+    PadletFormComponent
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        AppRoutingModule,
+        HttpClientModule,
+        FormsModule
+    ],
   providers: [PadletStoreService],
   bootstrap: [AppComponent]
 })

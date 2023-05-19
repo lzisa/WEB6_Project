@@ -1,4 +1,13 @@
-<div class="grid grid-cols-4 gap-4 bs-padlet-list-item"
-     *ngFor=" let padlet of padlets"
-     [padlet]="padlet" [routerLink]="'padlet.id'">
+<header class="bg-white shadow">
+  <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900">öffentliche Padlets
+      <button type="submit" class="btn">Button</button>
+    </h1>
+  </div>
+</header>
+<div class="flex flex-row gap-4 flex-wrap">
+  <div class="bs-padlet-list-item"
+       *ngFor=" let padlet of padlets"
+       [padlet]="padlet" [routerLink]="padlet.id.toString()">
+  </div>
 </div>

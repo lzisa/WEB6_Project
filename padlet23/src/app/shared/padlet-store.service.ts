@@ -1,31 +1,50 @@
 import {Injectable} from '@angular/core';
-import {Padlet} from "./padlet";
+import {Entry, Padlet} from "./padlet";
+import {HttpClient} from "@angular/common/http";
+import {catchError, Observable, retry, throwError} from "rxjs";
 
 @Injectable()
 export class PadletStoreService {
+  private api = 'http://padlet23.s2010456035.student.kwmhgb.at/api';
   padlets: Padlet[] = [];
 
-  constructor() {
-
-    this.padlets = [new Padlet(
-      1,
-      '12-01-01',
-      '12-01-01',
-      'Padlet für FH',
-      true,
-      2,
-      'dies ist die Beschreibung'
-    )];
+  constructor(private http: HttpClient) {
   }
 
-  getAll() {
-    return this.padlets;
+  getAll(): Observable<Array<Padlet>> {
+    return this.http.get<Array<Padlet>>(`${this.api}/padlets`).pipe(retry(3))
+      .pipe(catchError(this.errorHandler));
   }
 
-  getSingle(id: number): Padlet {
-    return <Padlet>this.padlets.find(padlet => padlet.id === id);
+  getAllEntries(id: number): Observable<Entry[]> {
+    return this.http.get<Entry[]>(`${this.api}/padlets/${id}/entries`)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler))
+  }
 
+  getSingle(id: number): Observable<Padlet> {
+    return this.http.get<Padlet>(`${this.api}/padlets/${id}`)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler))
+  }
+
+  create(padlet: Padlet): Observable<any> {
+    return this.http.post(`${this.api}/padlets`, padlet)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler))
+  }
+
+  update(padlet: Padlet): Observable<any> {
+    return this.http.put(`${this.api}/padlets/${padlet.id}`, padlet)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
+  remove(id: number): Observable<any> {
+    return this.http.delete(`${this.api}/padlets/${id}`)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
+
+  private errorHandler(error: Error | any): Observable<any> {
+    return throwError(error);
   }
 }
+
 
 

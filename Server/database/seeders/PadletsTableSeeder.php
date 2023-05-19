@@ -68,26 +68,81 @@ class PadletsTableSeeder extends Seeder
         $entry2->rating()->saveMany([$rating, $rating2]);
         $padlet->save();
 
+        // Create the second padlet (related to Angular)
         $padlet2 = new Padlet();
-        $padlet2->title = "Dies ist ein neues Padlet";
-
+        $padlet2->title = "Angular Framework Discussion";
+        $padlet2->is_public = true;
         $padlet2->user()->associate($user);
-        $padlet2->is_public = false;
         $padlet2->save();
 
-        $padlet2->entries()->saveMany([$entry3]);
-        $padlet2->save();
+        $entry3 = new Entry();
+        $entry3->text = "Let's discuss the latest features in Angular 12.";
+        $entry3->user()->associate($user);
+        $padlet2->entries()->save($entry3);
+
+        $entry4 = new Entry();
+        $entry4->text = "Angular's CLI tool simplifies project setup and development.";
+        $entry4->user()->associate($user);
+        $padlet2->entries()->save($entry4);
+
+        $comment3 = new Comment();
+        $comment3->text = "I'm excited about Angular's new Ivy rendering engine!";
+        $comment3->user()->associate($user);
+        $entry3->comment()->save($comment3);
+
+        $comment4 = new Comment();
+        $comment4->text = "The Angular Material library provides beautiful UI components.";
+        $comment4->user()->associate($user);
+        $entry4->comment()->save($comment4);
+
+        $rating3 = new Rating();
+        $rating3->rating = 4;
+        $rating3->user()->associate($user);
+        $entry3->rating()->save($rating3);
+
+        $rating4 = new Rating();
+        $rating4->rating = 5;
+        $rating4->user()->associate($user);
+        $entry4->rating()->save($rating4);
 
 
-        $right = new Userright();
-        $right->user()->associate($user);
-        $right->padlet()->associate($padlet);
-        $right->edit=true;
-        $right->save();
+        // Create the third padlet (related to Laravel)
+        $padlet3 = new Padlet();
+        $padlet3->title = "Exploring Laravel Framework";
+        $padlet3->is_public = true;
+        $padlet3->user()->associate($user);
+        $padlet3->save();
 
-        $right2 = new Userright();
-        $right2->user()->associate($user);
-        $right2->padlet()->associate($padlet2);
-        $right2->save();
+        $entry5 = new Entry();
+        $entry5->text = "Laravel is a popular PHP framework known for its elegant syntax and powerful features.";
+        $entry5->user()->associate($user);
+        $padlet3->entries()->save($entry5);
+
+        $entry6 = new Entry();
+        $entry6->text = "It follows the MVC (Model-View-Controller) architectural pattern, making development efficient.";
+        $entry6->user()->associate($user);
+        $padlet3->entries()->save($entry6);
+
+        $comment5 = new Comment();
+        $comment5->text = "I love how Laravel simplifies database migrations and schema management.";
+        $comment5->user()->associate($user);
+        $entry5->comment()->save($comment5);
+
+        $comment6 = new Comment();
+        $comment6->text = "Laravel's Eloquent ORM makes working with databases a breeze.";
+        $comment6->user()->associate($user);
+        $entry6->comment()->save($comment6);
+
+        $rating5 = new Rating();
+        $rating5->rating = 5;
+        $rating5->user()->associate($user);
+        $entry5->rating()->save($rating5);
+
+        $rating6 = new Rating();
+        $rating6->rating = 4;
+        $rating6->user()->associate($user);
+        $entry6->rating()->save($rating6);
+
+
     }
 }
