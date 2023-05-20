@@ -4,6 +4,11 @@ import {PadletStoreService} from "../shared/padlet-store.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PadletFactory} from "../shared/padlet-factory";
 import {FormControl, FormGroup} from "@angular/forms";
+import {EntryStoreService} from "../shared/entry-store.service";
+import {CommentStoreService} from "../shared/comment-store.service";
+
+import {forkJoin} from "rxjs";
+import {Comment} from "../shared/comment";
 
 @Component({
   selector: 'bs-padlet-detail',
@@ -13,10 +18,13 @@ import {FormControl, FormGroup} from "@angular/forms";
 export class PadletDetailComponent implements OnInit {
   padlet: Padlet = PadletFactory.empty();
   entries: Entry[] = [];
+  comments: Comment[] = [];
   editedTitle: string | undefined;
 
   constructor(
     private ps: PadletStoreService,
+    private es: EntryStoreService,
+    private cs: CommentStoreService,
     private route: ActivatedRoute,
     private router: Router,
   ) {
@@ -24,8 +32,17 @@ export class PadletDetailComponent implements OnInit {
 
   ngOnInit() {
     const params = this.route.snapshot.params;
-    this.ps.getSingle(params['id']).subscribe((p: Padlet) => this.padlet = p);
-    this.ps.getAllEntries(params['id']).subscribe(res => this.entries = res);
+    let padlet_id = params['id'];
+    this.ps.getSingle(padlet_id).subscribe((p: Padlet) => {
+      this.padlet = p;
+      this.getEntries(padlet_id);
+    });
+  }
+
+  getEntries(padlet_id: number): void {
+    this.es.getAllEntries(padlet_id).subscribe(entries => {
+      this.padlet.entries = entries;
+    });
   }
 
   getRating(num: number) {
@@ -38,9 +55,9 @@ export class PadletDetailComponent implements OnInit {
     }
   }
 
-  submitForm(){
+  submitForm() {
     if (this.editedTitle)
-    this.ps.update(this.padlet);
+      this.ps.update(this.padlet);
   }
 
   updatePadlet(title: string) {

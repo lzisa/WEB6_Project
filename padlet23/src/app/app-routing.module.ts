@@ -3,6 +3,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {PadletListComponent} from "./padlet-list/padlet-list.component";
 import {HomeComponent} from "./home/home.component";
 import {PadletDetailComponent} from "./padlet-detail/padlet-detail.component";
+//import {EntryFormComponent} from "./entry-form/entry-form.component";
 import {PadletFormComponent} from "./padlet-form/padlet-form.component";
 
 const routes: Routes = [
@@ -10,9 +11,8 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'padlets', component: PadletListComponent},
   {path: 'padlets/:id', component: PadletDetailComponent},
-  {path: 'padlets/:id/entries/:id', component: PadletDetailComponent},
-
-
+  {path: 'admin/:id', component: PadletFormComponent},
+  {path: 'admin/', component: PadletFormComponent},
 ];
 
 @NgModule({

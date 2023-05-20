@@ -1,0 +1,15 @@
+<h1>Padletformular</h1>
+<form class="ui large form" [formGroup]="padletForm"
+      (ngSubmit)="submitForm()">
+
+  <div class="form-control w-full max-w-xs">
+    <label class="label">
+      <span class="label-text">Name of Padlet</span>
+    </label>
+    <input formControlName="title" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs"/>
+    <span *ngIf="errors['title']" class="label-text-alt">{{errors['title']}}</span>
+  </div>
+  <button type="submit" class="btn btn-active btn-primary"
+          [disabled]="padletForm.invalid">Speichern
+  </button>
+</form>

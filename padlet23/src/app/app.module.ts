@@ -6,12 +6,15 @@ import { AppComponent } from './app.component';
 import { PadletListComponent } from './padlet-list/padlet-list.component';
 import { PadletListItemComponent } from './padlet-list-item/padlet-list-item.component';
 import { PadletDetailComponent } from './padlet-detail/padlet-detail.component';
-import { EntryListComponent } from './entry-list/entry-list.component';
 import {PadletStoreService} from "./shared/padlet-store.service";
+import {EntryStoreService} from "./shared/entry-store.service";
 import { HomeComponent } from './home/home.component';
 import {HttpClientModule} from "@angular/common/http";
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+
 import { PadletFormComponent } from './padlet-form/padlet-form.component';
+import {CommentStoreService} from "./shared/comment-store.service";
+import { EntryListItemComponent } from './padlet-detail/entry-list/entry-list-item/entry-list-item.component';
 
 @NgModule({
   declarations: [
@@ -19,18 +22,20 @@ import { PadletFormComponent } from './padlet-form/padlet-form.component';
     PadletListComponent,
     PadletListItemComponent,
     PadletDetailComponent,
-    EntryListComponent,
     HomeComponent,
-    PadletFormComponent
+
+    PadletFormComponent,
+     EntryListItemComponent
   ],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        AppRoutingModule,
-        HttpClientModule,
-        FormsModule
-    ],
-  providers: [PadletStoreService],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
+  ],
+  providers: [PadletStoreService, EntryStoreService, CommentStoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

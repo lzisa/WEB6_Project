@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NgModule} from "@angular/core";
 import {Entry, Padlet} from "../shared/padlet";
 import {PadletStoreService} from "../shared/padlet-store.service";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'bs-padlet-list',

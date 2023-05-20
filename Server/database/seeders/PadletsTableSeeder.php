@@ -32,11 +32,13 @@ class PadletsTableSeeder extends Seeder
         $padlet->save();
 
         $entry1 = new Entry();
+        $entry1->title="Senf";
         $entry1->text="ich habe hier meinen Senf hinzuzufügen!";
         $entry1->user()->associate($user);
 
 
         $entry2 = new Entry();
+        $entry2->title="Eintrag 2";
         $entry2->text="Dies ist die Beschreibung für Eintrag 2";
         $entry2->user()->associate($user);
 
@@ -52,6 +54,7 @@ class PadletsTableSeeder extends Seeder
         $padlet->save();
 
         $entry3 = new Entry();
+        $entry3->title= "Eintragg 3";
         $entry3->text="Dies ist die Beschreibung für Eintrag 3";
         $entry3->user()->associate($user);
 
@@ -76,11 +79,13 @@ class PadletsTableSeeder extends Seeder
         $padlet2->save();
 
         $entry3 = new Entry();
+        $entry3->title="latest features";
         $entry3->text = "Let's discuss the latest features in Angular 12.";
         $entry3->user()->associate($user);
         $padlet2->entries()->save($entry3);
 
         $entry4 = new Entry();
+        $entry4->title= "Angular CLI tool";
         $entry4->text = "Angular's CLI tool simplifies project setup and development.";
         $entry4->user()->associate($user);
         $padlet2->entries()->save($entry4);
@@ -114,11 +119,13 @@ class PadletsTableSeeder extends Seeder
         $padlet3->save();
 
         $entry5 = new Entry();
+        $entry5->title= "Beschreibung";
         $entry5->text = "Laravel is a popular PHP framework known for its elegant syntax and powerful features.";
         $entry5->user()->associate($user);
         $padlet3->entries()->save($entry5);
 
         $entry6 = new Entry();
+        $entry6->title = "how it works";
         $entry6->text = "It follows the MVC (Model-View-Controller) architectural pattern, making development efficient.";
         $entry6->user()->associate($user);
         $padlet3->entries()->save($entry6);
@@ -142,7 +149,5 @@ class PadletsTableSeeder extends Seeder
         $rating6->rating = 4;
         $rating6->user()->associate($user);
         $entry6->rating()->save($rating6);
-
-
     }
 }

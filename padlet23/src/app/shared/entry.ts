@@ -1,3 +1,5 @@
+import {Comment} from "./comment";
+
 export class Entry {
   constructor(public id: number,
               public text: string,
@@ -6,6 +8,7 @@ export class Entry {
               public padlet_id: number,
               public user_id: number,
               public title: string,
+              public comments: Array<Comment>
   ) {
   }
 }

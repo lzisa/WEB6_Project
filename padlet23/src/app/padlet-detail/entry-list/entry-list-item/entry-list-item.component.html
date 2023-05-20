@@ -1,0 +1,14 @@
+<div class="card-body" *ngIf="entry">
+  <h2 class="card-title">{{entry.title}}</h2>
+  <p>{{entry.text}}</p>
+  <div class="card-actions justify-end">
+    <button class="btn" [routerLink]="['../../admin', entry.id]">Edit</button>
+  </div>
+  <div>
+    <h3>Comments</h3>
+
+    <div *ngFor="let comment of comments" class="chat chat-end">
+      <div class="chat-bubble">{{comment.text}}</div>
+    </div>
+  </div>
+</div>
