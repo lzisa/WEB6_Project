@@ -12,7 +12,7 @@ const routes: Routes = [
   {path: 'padlets', component: PadletListComponent},
   {path: 'padlets/:id', component: PadletDetailComponent},
   {path: 'admin/:id', component: PadletFormComponent},
-  {path: 'admin/', component: PadletFormComponent},
+  {path: 'admin', component: PadletFormComponent},
 ];
 
 @NgModule({

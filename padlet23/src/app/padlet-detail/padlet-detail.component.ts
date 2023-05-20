@@ -41,7 +41,9 @@ export class PadletDetailComponent implements OnInit {
 
   getEntries(padlet_id: number): void {
     this.es.getAllEntries(padlet_id).subscribe(entries => {
-      this.padlet.entries = entries;
+      if(entries){
+        this.padlet.entries = entries;
+      }
     });
   }
 

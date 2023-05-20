@@ -8,7 +8,6 @@ import {PadletStoreService} from "../shared/padlet-store.service";
 import {Padlet} from "../shared/padlet";
 import {PadletErrorMessage, PadletErrorMessages} from "./padlet-form-error-messages";
 import {EntryStoreService} from "../shared/entry-store.service";
-import {EntryFactory} from "../shared/entry-factory";
 
 
 @Component({
@@ -42,7 +41,6 @@ export class PadletFormComponent implements OnInit {
         this.es.getAllEntries(id).subscribe(entries => this.padlet.entries = entries);
         this.initPadlet();
       });
-
     }
     this.initPadlet();
   }
@@ -60,9 +58,6 @@ export class PadletFormComponent implements OnInit {
   submitForm() {
     const padlet: Padlet = PadletFactory.fromObject(this.padletForm.value);
     padlet.entries = this.padlet.entries;
-    //console.log("submit Form entries: ");
-    //console.log(padlet.entries);
-
     if (this.isUpdatingPadlet) {
       this.ps.update(padlet).subscribe(res => {
         this.router.navigate(['../../padlets', padlet.id], {
@@ -71,7 +66,6 @@ export class PadletFormComponent implements OnInit {
       });
     } else {
       padlet.user_id = 1; //TODO: change later
-      console.log(padlet);
       this.ps.create(padlet).subscribe(res => {
         this.padlet = PadletFactory.empty();
         this.padletForm.reset(PadletFactory.empty());
@@ -82,7 +76,7 @@ export class PadletFormComponent implements OnInit {
   }
 
   updateErrorMessages() {
-    console.log("Is invalid? " + this.padletForm.invalid);
+    //console.log("Is invalid? " + this.padletForm.invalid);
 
     this.errors = {};
     for (const message of PadletErrorMessages) {
@@ -90,8 +84,6 @@ export class PadletFormComponent implements OnInit {
       if (control && control.dirty && control.invalid && control.errors
         && control.errors[message.forValidator] && !this.errors[message.forControl]) {
         this.errors[message.forControl] = message.text;
-        // console.log(this.errors);
-        console.log("caught errors");
       }
     }
   }
