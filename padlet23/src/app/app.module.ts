@@ -9,7 +9,7 @@ import {PadletDetailComponent} from './padlet-detail/padlet-detail.component';
 import {PadletStoreService} from "./shared/padlet-store.service";
 import {EntryStoreService} from "./shared/entry-store.service";
 import {HomeComponent} from './home/home.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClientModule} from "@angular/common/http";
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 import {PadletFormComponent} from './padlet-form/padlet-form.component';
@@ -17,7 +17,12 @@ import {CommentStoreService} from "./shared/comment-store.service";
 import {EntryListItemComponent} from './padlet-detail/entry-list/entry-list-item/entry-list-item.component';
 import {EntryFormComponent} from "./entry-form/entry-form.component";
 import {UserStoreService} from "./shared/user-store.service";
-import { CommentListItemComponent } from './padlet-detail/entry-list/entry-list-item/comment-list-item/comment-list-item.component';
+import {
+  CommentListItemComponent
+} from './padlet-detail/entry-list/entry-list-item/comment-list-item/comment-list-item.component';
+import {LoginComponent} from './login/login.component';
+import {AuthenticationService} from "./shared/authentication.service";
+import {TokenInterceptorService} from "./shared/token-interceptor.service";
 
 @NgModule({
   declarations: [
@@ -30,7 +35,8 @@ import { CommentListItemComponent } from './padlet-detail/entry-list/entry-list-
     PadletFormComponent,
     EntryFormComponent,
     EntryListItemComponent,
-    CommentListItemComponent
+    CommentListItemComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +46,16 @@ import { CommentListItemComponent } from './padlet-detail/entry-list/entry-list-
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [PadletStoreService, EntryStoreService, CommentStoreService, UserStoreService],
+  providers: [PadletStoreService,
+    EntryStoreService,
+    CommentStoreService,
+    UserStoreService,
+    AuthenticationService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

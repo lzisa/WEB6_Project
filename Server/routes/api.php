@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntryController;
@@ -25,9 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('padlets', [PadletController::class, 'index']);
 Route::get('padlets/{padlet_id}', [PadletController::class, 'findByID']);
 Route::get('padlets/checkByID/{padlet_id}', [PadletController::class, 'checkByID']);
-Route::post('padlets', [PadletController::class, 'save']);
-Route::put('padlets/{padlet_id}', [PadletController::class, 'update']);
-Route::delete('padlets/{padlet_id}', [PadletController::class, 'delete']);
+
 
 //entries
 Route::get('entries', [EntryController::class, 'index']);
@@ -64,3 +63,13 @@ Route::get('users', [\App\Http\Controllers\UserController::class, 'getUsers']);
 Route::get('users/{user_id}', [\App\Http\Controllers\UserController::class, 'getUserByID']);
 Route::get('users/{user_id}/username', [\App\Http\Controllers\UserController::class, 'getUsernameByID']);
 
+/* auth */
+Route::post('auth/login', [AuthController::class,'login']);
+
+// methods which need authentication - JWT Token
+Route::group(['middleware' => ['api','auth.jwt']], function(){
+    Route::post('padlets', [PadletController::class, 'save']);
+    Route::post('auth/logout', [AuthController::class,'logout']);
+    Route::put('padlets/{padlet_id}', [PadletController::class, 'update']);
+    Route::delete('padlets/{padlet_id}', [PadletController::class, 'delete']);
+});

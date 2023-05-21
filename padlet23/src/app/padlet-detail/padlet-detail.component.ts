@@ -12,6 +12,7 @@ import {Comment} from "../shared/comment";
 import {User} from "../shared/user";
 import {UserFactory} from "../shared/user-factory";
 import {UserStoreService} from "../shared/user-store.service";
+import {AuthenticationService} from "../shared/authentication.service";
 
 
 @Component({
@@ -34,6 +35,7 @@ export class PadletDetailComponent implements OnInit {
     private us: UserStoreService,
     private route: ActivatedRoute,
     private router: Router,
+    public authService: AuthenticationService
   ) {
   }
 

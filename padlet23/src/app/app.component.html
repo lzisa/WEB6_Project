@@ -67,6 +67,17 @@
     </ul>
   </div>
   <div class="navbar-end">
+<!-- Login Link -->
+    <div class="ui {{isLoggedIn()?'four':'three'}} item tabs menu">
+      <a routerLink="home" routerLinkActive="active" class="item">Home</a>
+      <a routerLink="books" routerLinkActive="active" class="item">Bücher</a>
+      <a *ngIf="isLoggedIn()" routerLink="admin" routerLinkActive="active"
+         class="item">Administration</a>
+      <a routerLink="login" routerLinkActive="active"
+         class="item">{{getLoginLabel()}}</a>
+    </div>
+<!-- Person Dropdown with Links -->
+
     <div class="dropdown dropdown-end">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">

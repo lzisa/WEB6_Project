@@ -6,6 +6,7 @@ import {PadletDetailComponent} from "./padlet-detail/padlet-detail.component";
 //import {EntryFormComponent} from "./entry-form/entry-form.component";
 import {PadletFormComponent} from "./padlet-form/padlet-form.component";
 import {EntryFormComponent} from "./entry-form/entry-form.component";
+import {LoginComponent} from "./login/login.component";
 
 const routes: Routes = [
   {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -17,6 +18,7 @@ const routes: Routes = [
   {path: 'admin/padlets/:padlet_id/entries/:entry_id', component: EntryFormComponent},
   {path: 'admin/padlets/:padlet_id/entries', component: EntryFormComponent},
   {path: 'padlets/:padlet_id/:entry_id', component: HomeComponent},
+  {path: 'login', component: LoginComponent},
 ];
 
 @NgModule({
