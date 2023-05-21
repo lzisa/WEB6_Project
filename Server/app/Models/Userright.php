@@ -11,7 +11,7 @@ class Userright extends Model
 {
     use HasFactory;
 
-    protected $fillable =['padlet_id', 'user_id', 'read', 'edit', 'delete'];
+    protected $fillable =['padlet_id', 'user_id', 'edit'];
 
     public function user(): BelongsTo{
         return $this->belongsTo(User::class);

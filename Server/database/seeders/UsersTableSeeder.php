@@ -16,21 +16,22 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $user = new User();
-        $user->name = 'testuser';
-        $user->email = 'testuser@gmail.com';
+        $user->name = 'user';
+        $user->email = 'user@gmail.com';
         $user->password = bcrypt('secret');
         $user->save();
 
         $user2 = new User();
-        $user2->name = 'user2';
-        $user2->email = 'user2@gmail.com';
+        $user2->name = 'hanna';
+        $user2->email = 'hanna@gmail.com';
         $user2->password = bcrypt('secret');
         $user2->save();
 
-        $user3 = new User();
-        $user3->name = 'lzisa';
-        $user3->email = 'lzisa@gmail.com';
-        $user3->password = bcrypt('secret');
-        $user3->save();
+        $user4 = new \App\Models\User();
+        $user4->name = 'patricia';
+        $user4->email = 'patricia@gmail.com';
+        $user4->password = bcrypt('secret');
+        $user4->save();
+
     }
 }

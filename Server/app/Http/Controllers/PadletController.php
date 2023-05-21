@@ -18,8 +18,6 @@ class PadletController extends Controller
         DB::beginTransaction();
         try {
             $padlet = Padlet::create($request->all());
-
-
             //save entries
 
             if (isset($request['entries']) && is_array($request['entries'])) {
@@ -29,13 +27,6 @@ class PadletController extends Controller
                 }
             }
 
-            /*     if (isset($request['user']) && is_array($request['user'])) {
-                     foreach ($request['user'] as $u) {
-                         $user = User::firstOrNew(['id' => $u['id'], 'name' => $u['name']]);
-                         $padlet->user()->save($user);
-                     }
-                 }
-     */
             DB::commit();
             return response()->json($padlet, 201);
         } catch (\Exception $e) {

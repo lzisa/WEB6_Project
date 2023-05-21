@@ -32,21 +32,21 @@ class PadletsTableSeeder extends Seeder
         $padlet->save();
 
         $entry1 = new Entry();
-        $entry1->title="Senf";
-        $entry1->text="ich habe hier meinen Senf hinzuzufügen!";
+        $entry1->title = "Senf";
+        $entry1->text = "ich habe hier meinen Senf hinzuzufügen!";
         $entry1->user()->associate($user);
 
 
         $entry2 = new Entry();
-        $entry2->title="Eintrag 2";
-        $entry2->text="Dies ist die Beschreibung für Eintrag 2";
+        $entry2->title = "Eintrag 2";
+        $entry2->text = "Dies ist die Beschreibung für Eintrag 2";
         $entry2->user()->associate($user);
 
         $padlet->entries()->saveMany([$entry1, $entry2]);
         $padlet->save();
 
         $comment1 = new Comment();
-        $comment1->text="Ich kommentiere";
+        $comment1->text = "Ich kommentiere";
         $comment1->user()->associate($user);
 
 
@@ -54,18 +54,18 @@ class PadletsTableSeeder extends Seeder
         $padlet->save();
 
         $entry3 = new Entry();
-        $entry3->title= "Eintragg 3";
-        $entry3->text="Dies ist die Beschreibung für Eintrag 3";
+        $entry3->title = "Eintragg 3";
+        $entry3->text = "Dies ist die Beschreibung für Eintrag 3";
         $entry3->user()->associate($user);
 
 
         $rating = new Rating();
-        $rating->rating=4;
+        $rating->rating = 4;
         $rating->user()->associate($user);
 
 
         $rating2 = new Rating();
-        $rating2->rating=2;
+        $rating2->rating = 2;
         $rating2->user()->associate($user);
 
         $entry2->rating()->saveMany([$rating, $rating2]);
@@ -79,13 +79,13 @@ class PadletsTableSeeder extends Seeder
         $padlet2->save();
 
         $entry3 = new Entry();
-        $entry3->title="latest features";
+        $entry3->title = "latest features";
         $entry3->text = "Let's discuss the latest features in Angular 12.";
         $entry3->user()->associate($user);
         $padlet2->entries()->save($entry3);
 
         $entry4 = new Entry();
-        $entry4->title= "Angular CLI tool";
+        $entry4->title = "Angular CLI tool";
         $entry4->text = "Angular's CLI tool simplifies project setup and development.";
         $entry4->user()->associate($user);
         $padlet2->entries()->save($entry4);
@@ -119,7 +119,7 @@ class PadletsTableSeeder extends Seeder
         $padlet3->save();
 
         $entry5 = new Entry();
-        $entry5->title= "Beschreibung";
+        $entry5->title = "Beschreibung";
         $entry5->text = "Laravel is a popular PHP framework known for its elegant syntax and powerful features.";
         $entry5->user()->associate($user);
         $padlet3->entries()->save($entry5);
@@ -149,5 +149,29 @@ class PadletsTableSeeder extends Seeder
         $rating6->rating = 4;
         $rating6->user()->associate($user);
         $entry6->rating()->save($rating6);
+
+        $r1 = new Userright();
+        $r1->user()->associate($user);
+        $r1->padlet()->associate($padlet);
+        $r1->edit = true;
+        $r1->save();
+
+        $user3 = new \App\Models\User();
+        $user3->name = 'lisa';
+        $user3->email = 'lisa@gmail.com';
+        $user3->password = bcrypt('secret');
+        $user3->save();
+
+        $rightUser3Padlet1 = new Userright();
+        $rightUser3Padlet1->user()->associate($user3);
+        $rightUser3Padlet1->padlet()->associate($padlet);
+        $rightUser3Padlet1->edit = true;
+        $rightUser3Padlet1->save();
+
+        $rightUser3Padlet2 = new Userright();
+        $rightUser3Padlet2->user()->associate($user3);
+        $rightUser3Padlet2->padlet()->associate($padlet2);
+        $rightUser3Padlet2->edit = true;
+        $rightUser3Padlet2->save();
     }
 }

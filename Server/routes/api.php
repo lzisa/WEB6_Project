@@ -7,6 +7,8 @@ use App\Http\Controllers\EntryController;
 use App\Http\Controllers\PadletController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserRightsController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,11 +59,17 @@ Route::get('padlets/{padlet_id}/entries/{entry_id}/user_id', [EntryController::c
 Route::get('padlets/{padlet_id}/entries/{entry_id}/comments/{comment_id}/user_id', [CommentController::class, 'findOwnerId']);
 
 //userrights
+Route::get('userrights', [UserRightsController::class, 'index']);
+Route::get('padlets/{padlet_id}/userrights', [UserRightsController::class, 'getUserrightsOfPadlet']);
+Route::get('padlets/{padlet_id}/userrights/{user_id}', [UserRightsController::class, 'getIfUserRightsToPadlet']);
+Route::delete('padlets/{padlet_id}/userrights/{user_id}', [UserRightsController::class, 'delete']);
+Route::post('userrights', [UserRightsController::class, 'save']);
+
 
 //user
-Route::get('users', [\App\Http\Controllers\UserController::class, 'getUsers']);
-Route::get('users/{user_id}', [\App\Http\Controllers\UserController::class, 'getUserByID']);
-Route::get('users/{user_id}/username', [\App\Http\Controllers\UserController::class, 'getUsernameByID']);
+Route::get('users', [UserController::class, 'getUsers']);
+Route::get('users/{user_id}', [UserController::class, 'getUserByID']);
+Route::get('users/{user_id}/username', [UserController::class, 'getUsernameByID']);
 
 /* auth */
 Route::post('auth/login', [AuthController::class,'login']);
