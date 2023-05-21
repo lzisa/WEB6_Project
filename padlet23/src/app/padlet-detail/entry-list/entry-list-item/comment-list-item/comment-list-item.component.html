@@ -1,0 +1,10 @@
+
+<div *ngIf="comment" class="chat chat-end">
+  <div class="chat-header">
+    {{user.name}}
+    <time class="text-xs opacity-50">{{comment.created_at}}</time>
+  </div>
+  <div class="chat-bubble">
+    {{comment.text}}
+  </div>
+</div>
