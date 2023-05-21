@@ -20,6 +20,15 @@ class CommentController extends Controller
         $comments = Comment::where('entry_id', $entry_id)->get();
         return $comments != null ? response()->json($comments, 200) : response()->json(false, 200);
     }
+
+    public function findOwnerId(string $padlet_id, $entry_id, $comment_id)
+    {
+        $comment = Comment::where('id', $comment_id)->first();
+        $data = json_decode($comment, true);
+        $userID =$data['user_id'];
+        //return response()->json(['user_id'=>$entry->user_id], 200);
+        return response()->json($userID, 200);
+    }
     public function save(Request $request, string $padlet_id, string $entry_id): JsonResponse
     {
         $request = $this->parseRequest($request);

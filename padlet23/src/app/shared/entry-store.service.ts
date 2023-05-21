@@ -31,7 +31,10 @@ export class EntryStoreService {
       .pipe(retry(3)).pipe(catchError(this.errorHandler))
   }
 
-
+  remove(padlet_id: number, entry_id: number): Observable<any> {
+    return this.http.delete(`${this.api}/padlets/${padlet_id}/entries/${entry_id}`)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler));
+  }
   private errorHandler(error: Error | any): Observable<any> {
     return throwError(error);
   }

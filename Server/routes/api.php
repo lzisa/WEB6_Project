@@ -35,6 +35,7 @@ Route::get('padlets/{padlet_id}/entries', [EntryController::class, 'getEntriesOf
 Route::post('padlets/{padlet_id}/entries', [EntryController::class, 'save']);
 Route::put('padlets/{padlet_id}/entries/{entry_id}', [EntryController::class, 'update']);
 Route::get('padlets/{padlet_id}/entries/{entry_id}', [EntryController::class, 'findById']);
+Route::delete('padlets/{padlet_id}/entries/{entry_id}', [EntryController::class, 'remove']);
 
 //ratings
 Route::get('padlets/{padlet_id}/entries/{entry_id}/ratings', [RatingController::class, 'getRatingsOfEntry']);
@@ -51,8 +52,15 @@ Route::post('padlets/{padlet_id}/entries/{entry_id}/comments', [CommentControlle
 Route::delete('padlets/{padlet_id}/entries/{entry_id}/comments/{comment_id}', [CommentController::class, 'delete']);
 Route::put('padlets/{padlet_id}/entries/{entry_id}/comments/{comment_id}', [CommentController::class, 'update']);
 
-//find owner of padlet
-Route::get('padlets/{padlet_id}/user_id', [PadletController::class, 'findOwner']);
+//find owner of padlet, entry, comment
+Route::get('padlets/{padlet_id}/user_id', [PadletController::class, 'findOwnerId']);
+Route::get('padlets/{padlet_id}/entries/{entry_id}/user_id', [EntryController::class, 'findOwnerId']);
+Route::get('padlets/{padlet_id}/entries/{entry_id}/comments/{comment_id}/user_id', [CommentController::class, 'findOwnerId']);
 
 //userrights
+
+//user
+Route::get('users', [\App\Http\Controllers\UserController::class, 'getUsers']);
+Route::get('users/{user_id}', [\App\Http\Controllers\UserController::class, 'getUserByID']);
+Route::get('users/{user_id}/username', [\App\Http\Controllers\UserController::class, 'getUsernameByID']);
 

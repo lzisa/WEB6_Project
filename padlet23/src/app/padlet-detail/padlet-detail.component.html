@@ -4,8 +4,7 @@
       <button class="btn" [routerLink]="['../../admin', padlet.id]">Edit Padlet</button>
       <button class="btn bg-primary" (click)="removePadlet()">Delete</button>
     </h1>
-
-    <p>by {{padlet.user_id}}</p>
+    <p>by {{user.name}}</p>
   </div>
 </header>
 <main>
@@ -14,6 +13,7 @@
           routerLinkActive="active">
       Add New Entry
     </button>
+
     <div class="card w-96 bg-base-100 shadow-xl bs-entry-list-item" *ngFor="let entry of padlet.entries" [entry]="entry"
          [routerLink]="entry.id.toString()">
       <!-- Templating of Entries -->

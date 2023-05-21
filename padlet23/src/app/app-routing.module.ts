@@ -16,6 +16,7 @@ const routes: Routes = [
   {path: 'admin', component: PadletFormComponent},
   {path: 'admin/padlets/:padlet_id/entries/:entry_id', component: EntryFormComponent},
   {path: 'admin/padlets/:padlet_id/entries', component: EntryFormComponent},
+  {path: 'padlets/:padlet_id/:entry_id', component: HomeComponent},
 ];
 
 @NgModule({

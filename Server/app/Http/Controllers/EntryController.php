@@ -23,6 +23,19 @@ class EntryController extends Controller
         $entries = Entry::where('padlet_id', $padlet_id)->with(['comment', 'user', 'rating'])->get();
         return $entries != null ? response()->json($entries, 200) : response()->json(false, 200);
     }
+    public function findById(string $padlet_id, $entry_id)
+    {
+        $entry = Entry::where('id', $entry_id)->first();
+        return $entry != null ? response()->json($entry, 200) : response()->json(false, 200);
+    }
+    public function findOwnerId(string $padlet_id, $entry_id)
+    {
+        $entry = Entry::where('id', $entry_id)->first();
+        $data = json_decode($entry, true);
+        $userID =$data['user_id'];
+        //return response()->json(['user_id'=>$entry->user_id], 200);
+        return response()->json($userID, 200);
+    }
 
     public function save(Request $request, string $padlet_id): JsonResponse
     {
@@ -84,6 +97,15 @@ class EntryController extends Controller
         }
     }
 
+    public function remove(string $padlet_id, $entry_id): JsonResponse
+    {
+        $entry = Entry::where('id', $entry_id)->first();
+        if ($entry != null) {
+            $entry->delete();
+            return response()->json('entry (' . $entry_id . ') successfully deleted', 200);
+        } else
+            return response()->json('entry could not be deleted - it does not exist', 422);
+    }
 
     private function parseRequest(Request $request): Request
     {
@@ -93,9 +115,5 @@ class EntryController extends Controller
     }
 
 
-    public function findById(string $padlet_id, $entry_id)
-    {
-        $entry = Entry::where('id', $entry_id)->first();
-        return $entry != null ? response()->json($entry, 200) : response()->json(false, 200);
-    }
+
 }

@@ -9,6 +9,10 @@ import {CommentStoreService} from "../shared/comment-store.service";
 
 import {forkJoin} from "rxjs";
 import {Comment} from "../shared/comment";
+import {User} from "../shared/user";
+import {UserFactory} from "../shared/user-factory";
+import {UserStoreService} from "../shared/user-store.service";
+
 
 @Component({
   selector: 'bs-padlet-detail',
@@ -17,14 +21,17 @@ import {Comment} from "../shared/comment";
 })
 export class PadletDetailComponent implements OnInit {
   padlet: Padlet = PadletFactory.empty();
+
   entries: Entry[] = [];
   comments: Comment[] = [];
+  user: User = UserFactory.empty();
   editedTitle: string | undefined;
 
   constructor(
     private ps: PadletStoreService,
     private es: EntryStoreService,
     private cs: CommentStoreService,
+    private us: UserStoreService,
     private route: ActivatedRoute,
     private router: Router,
   ) {
@@ -33,15 +40,27 @@ export class PadletDetailComponent implements OnInit {
   ngOnInit() {
     const params = this.route.snapshot.params;
     let padlet_id = params['id'];
+    console.log(params);
     this.ps.getSingle(padlet_id).subscribe((p: Padlet) => {
       this.padlet = p;
+      console.log(this.padlet);
       this.getEntries(padlet_id);
+      this.getUser(padlet_id);
+    });
+  }
+
+  getUser(id: number): void {
+    this.us.getSingle(id).subscribe(user => {
+      this.user = user;
     });
   }
 
   getEntries(padlet_id: number): void {
+    console.log(padlet_id);
     this.es.getAllEntries(padlet_id).subscribe(entries => {
-      if(entries){
+      console.log(entries);
+      if (entries) {
+        console.log(entries);
         this.padlet.entries = entries;
       }
     });

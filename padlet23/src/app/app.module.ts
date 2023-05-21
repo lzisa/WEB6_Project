@@ -16,6 +16,8 @@ import {PadletFormComponent} from './padlet-form/padlet-form.component';
 import {CommentStoreService} from "./shared/comment-store.service";
 import {EntryListItemComponent} from './padlet-detail/entry-list/entry-list-item/entry-list-item.component';
 import {EntryFormComponent} from "./entry-form/entry-form.component";
+import {UserStoreService} from "./shared/user-store.service";
+import { CommentListItemComponent } from './padlet-detail/entry-list/entry-list-item/comment-list-item/comment-list-item.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,8 @@ import {EntryFormComponent} from "./entry-form/entry-form.component";
 
     PadletFormComponent,
     EntryFormComponent,
-    EntryListItemComponent
+    EntryListItemComponent,
+    CommentListItemComponent
   ],
   imports: [
     BrowserModule,
@@ -37,7 +40,7 @@ import {EntryFormComponent} from "./entry-form/entry-form.component";
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [PadletStoreService, EntryStoreService, CommentStoreService],
+  providers: [PadletStoreService, EntryStoreService, CommentStoreService, UserStoreService],
   bootstrap: [AppComponent]
 })
 export class AppModule {
