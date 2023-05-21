@@ -14,6 +14,12 @@ class CommentController extends Controller
         $comment = Comment::with(['user', 'entry'])->get();
         return response()->json($comment, 200);
     }
+
+    public function getCommentsOfEntry(string $padlet_id, string $entry_id):jsonResponse
+    {
+        $comments = Comment::where('entry_id', $entry_id)->get();
+        return $comments != null ? response()->json($comments, 200) : response()->json(false, 200);
+    }
     public function save(Request $request, string $padlet_id, string $entry_id): JsonResponse
     {
         $request = $this->parseRequest($request);

@@ -20,7 +20,7 @@ class RatingController extends Controller
         return response()->json($rating, 200);
     }
 
-    public function getRatingsOfEntry(string $entry_id):jsonResponse
+    public function getRatingsOfEntry(string $padlet_id, string $entry_id):jsonResponse
     {
         $ratings = Rating::where('entry_id', $entry_id)->get();
         return $ratings != null ? response()->json($ratings, 200) : response()->json(false, 200);

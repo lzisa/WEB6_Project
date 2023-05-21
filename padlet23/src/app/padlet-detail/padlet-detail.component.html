@@ -10,6 +10,10 @@
 </header>
 <main>
   <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
+    <button type="submit" class="btn" [routerLink]="['../../admin/padlets/'+ padlet.id+'/entries']"
+          routerLinkActive="active">
+      Add New Entry
+    </button>
     <div class="card w-96 bg-base-100 shadow-xl bs-entry-list-item" *ngFor="let entry of padlet.entries" [entry]="entry"
          [routerLink]="entry.id.toString()">
       <!-- Templating of Entries -->

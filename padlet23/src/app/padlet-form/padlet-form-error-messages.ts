@@ -9,5 +9,5 @@ export class PadletErrorMessage {
 
 export const PadletErrorMessages = [
   new PadletErrorMessage('title', 'required',
-    'Ein Buchtitel muss angegeben werden')
+    'Das Padlet muss benannt werden')
 ];

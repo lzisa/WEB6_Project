@@ -2,7 +2,7 @@
   <h2 class="card-title">{{entry.title}}</h2>
   <p>{{entry.text}}</p>
   <div class="card-actions justify-end">
-    <button class="btn" [routerLink]="['../../admin', entry.id]">Edit</button>
+    <button class="btn" [routerLink]="['../../admin/padlets/'+ entry.padlet_id +'/entries/' +entry.id]">Edit</button>
   </div>
   <div>
     <h3>Comments</h3>
