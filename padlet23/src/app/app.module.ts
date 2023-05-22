@@ -36,7 +36,7 @@ import {TokenInterceptorService} from "./shared/token-interceptor.service";
     EntryFormComponent,
     EntryListItemComponent,
     CommentListItemComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,

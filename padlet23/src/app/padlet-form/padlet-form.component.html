@@ -8,7 +8,7 @@
     <input formControlName="title" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs"/>
     <span *ngIf="errors['title']" class="label-text-alt">{{errors['title']}}</span>
   </div>
-  <button type="submit" class="btn btn-active btn-primary"
+  <button type="submit" class="btn btn-active"
           [disabled]="padletForm.invalid">Speichern
   </button>
 </form>

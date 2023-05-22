@@ -12,8 +12,9 @@
 <main>
   <div class="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
     <button
+      class="btn btn-primary"
       *ngIf="authService.isLoggedIn()"
-      type="submit" class="btn"
+
       [routerLink]="['../../admin/padlets/'+ padlet.id+'/entries']"
       routerLinkActive="active">
       Add New Entry

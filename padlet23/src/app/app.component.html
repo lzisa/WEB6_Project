@@ -1,4 +1,4 @@
-<div class="navbar bg-base-100">
+<div class="navbar bg-primary">
   <div class="navbar-start">
     <div class="dropdown">
       <label tabindex="0" class="btn btn-ghost lg:hidden">
@@ -15,24 +15,14 @@
         </li>
         <li>
           <a routerLink="padlets" routerLinkActive="active"
-             class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">Alle
-            Padlets
+             class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
+            Padlet Overview
           </a>
         </li>
-        <!-- Submenu
-        <li tabindex="0">
-          <a class="justify-between">
-            Parent
-            <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-              <path d="M8.59,16.58L13.17,12L8.59,7.41L10,6L16,12L10,18L8.59,16.58Z"/>
-            </svg>
-          </a>
-          <ul class="p-2">
-            <li><a>Submenu 1</a></li>
-            <li><a>Submenu 2</a></li>
-          </ul>
-        </li>
-        -->
+        <!--<li>
+          <a routerLink="login" routerLinkActive="active"
+             class="item">{{getLoginLabel()}}</a>
+        </li>-->
       </ul>
     </div>
     <a class="btn btn-ghost normal-case text-xl">ShareWall</a>
@@ -44,44 +34,26 @@
            class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">
           Home</a>
       </li>
-      <!-- submenu
-      <li tabindex="0">
-        <a>
-          Parent
-          <svg class="fill-current" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
-            <path d="M7.41,8.58L12,13.17L16.59,8.58L18,10L12,16L6,10L7.41,8.58Z"/>
-          </svg>
-        </a>
-        <ul class="p-2">
-          <li><a>Submenu 1</a></li>
-          <li><a>Submenu 2</a></li>
-        </ul>
-      </li>
-      -->
       <li>
         <a routerLink="padlets" routerLinkActive="active"
            class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-          Alle Padlets
+          Padlet Overview
         </a>
+      </li>
+
+      <li *ngIf="!isLoggedIn()">
+        <a routerLink="login" routerLinkActive="active"
+           class="item">{{getLoginLabel()}}</a>
       </li>
     </ul>
   </div>
   <div class="navbar-end">
-<!-- Login Link -->
-    <div class="ui {{isLoggedIn()?'four':'three'}} item tabs menu">
-      <a routerLink="home" routerLinkActive="active" class="item">Home</a>
-      <a routerLink="books" routerLinkActive="active" class="item">Bücher</a>
-      <a *ngIf="isLoggedIn()" routerLink="admin" routerLinkActive="active"
-         class="item">Administration</a>
-      <a routerLink="login" routerLinkActive="active"
-         class="item">{{getLoginLabel()}}</a>
-    </div>
-<!-- Person Dropdown with Links -->
-
-    <div class="dropdown dropdown-end">
+    <!-- Person Dropdown with Links (only visible when logged in)-->
+    <div class="dropdown dropdown-end" *ngIf="isLoggedIn()">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full">
-          <!--<img src="/images/stock/photo-1534528741775-53994a69daeb.jpg"/>-->
+          <img
+            src="https://img.freepik.com/free-photo/pretty-smiling-joyfully-female-with-fair-hair-dressed-casually-looking-with-satisfaction_176420-15187.jpg?w=900&t=st=1684743996~exp=1684744596~hmac=28c3c827efb96d251969c02e0742c487efc9c55c97acf0582a9d19fec1aa0f5b"/>
         </div>
       </label>
       <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
@@ -91,8 +63,13 @@
             <span class="badge">New</span>
           </a>
         </li>
-        <li><a>Settings</a></li>
-        <li><a>Logout</a></li>
+        <li *ngIf="isLoggedIn()"><a>Settings</a></li>
+        <li><a *ngIf="isLoggedIn()" routerLink="admin" routerLinkActive="active"
+               class="item">Administration</a>
+        </li>
+        <li><a routerLink="login" routerLinkActive="active"
+               class="item">{{getLoginLabel()}}</a>
+        </li>
       </ul>
     </div>
   </div>

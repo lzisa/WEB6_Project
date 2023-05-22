@@ -26,7 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get('padlets', [PadletController::class, 'index']);
 Route::get('padlets/{padlet_id}', [PadletController::class, 'findByID']);
 Route::get('padlets/checkByID/{padlet_id}', [PadletController::class, 'checkByID']);
-
+Route::get('{user_id}/padlets', [PadletController::class, 'getPadletsOfUser']);
 
 //entries
 Route::get('entries', [EntryController::class, 'index']);
