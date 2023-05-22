@@ -10,7 +10,7 @@ use App\Models\Userright;
 
 class Padlet extends Model
 {
-    protected $fillable =['title', 'is_public', 'user_id'];
+    protected $fillable =['title', 'is_public', 'user_id', 'picture'];
 
 
 

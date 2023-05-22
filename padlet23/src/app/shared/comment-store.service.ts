@@ -17,6 +17,11 @@ export class CommentStoreService {
       .pipe(retry(3)).pipe(catchError(this.errorHandler))
   }
 
+  create(comment: Comment, padlet_id: number): Observable<any> {
+    return this.http.post(`${this.api}/padlets/${padlet_id}/entries/${comment.entry_id}/comments`, comment)
+      .pipe(retry(3)).pipe(catchError(this.errorHandler))
+  }
+
   private errorHandler(error: Error | any): Observable<any> {
     return throwError(error);
   }

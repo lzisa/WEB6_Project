@@ -19,11 +19,11 @@ export class PadletStoreService {
     return this.http.get<Array<Padlet>>(`${this.api}/${user_id}/padlets`).pipe(retry(3))
       .pipe(catchError(this.errorHandler));
   }
-  getAllEntries(id: number): Observable<Entry[]> {
-    return this.http.get<Entry[]>(`${this.api}/padlets/${id}/entries`)
-      .pipe(retry(3)).pipe(catchError(this.errorHandler))
-  }
 
+  getPublicPadlets(): Observable<Array<Padlet>> {
+    return this.http.get<Array<Padlet>>(`${this.api}/padlets/public`).pipe(retry(3))
+      .pipe(catchError(this.errorHandler));
+  }
   getSingle(id: number): Observable<Padlet> {
     return this.http.get<Padlet>(`${this.api}/padlets/${id}`)
       .pipe(retry(3)).pipe(catchError(this.errorHandler))

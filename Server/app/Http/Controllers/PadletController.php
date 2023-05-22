@@ -96,6 +96,11 @@ class PadletController extends Controller
         $padlets = Padlet::with(['user', 'userright', 'entries.comment', 'entries.rating'])->get();
         return response()->json($padlets, 200);
     }
+    public function getPublicPadlets(): JsonResponse
+    {
+        $padlets = Padlet::where('is_public', 1)->get();
+        return response()->json($padlets, 200);
+    }
     public function getPadletsOfUser(string $user_id): JsonResponse
     {
         $padlet = Padlet::where('user_id', $user_id)->get();

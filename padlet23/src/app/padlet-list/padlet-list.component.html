@@ -1,41 +1,58 @@
 <header class="bg-white shadow">
   <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
     <h1 class="text-3xl font-bold tracking-tight text-gray-900">
-      Padlet Overview
+      {{this.selectedText}}
       <button type="submit" class="btn" routerLink="./../admin" routerLinkActive="active">
         Add New Padlet
       </button>
     </h1>
   </div>
 </header>
+<div class="flex">
+  <select [(ngModel)]="selectedOption" (ngModelChange)="onOptionChange()"
+          class="select w-full max-w-xs bg-primary">
+    <option value="option1">Padlets created by me</option>
+    <option value="option2">Padlets shared with me</option>
+    <option value="option3">Public Padlets</option>
+  </select>
+</div>
 <div class="justify-center flex-col flex">
-  <div class="flex flex-col justify-center" >
-    <h2 class="text-3xl font-bold flex flex-col justify-center">My Padlets</h2>
-  </div>
-  <div class="flex flex-row gap-4 flex-wrap justify-center">
-    <div class="bs-padlet-list-item"
-         *ngFor=" let padlet of padletsPrivate"
-         [padlet]="padlet" [routerLink]="padlet.id.toString()">
+  <!-- only padlets created by user logged in -->
+  <div *ngIf="selectedOption == 'option1'">
+    <div class="flex flex-col justify-center">
+      <h2 class="text-3xl font-bold flex flex-col justify-center">My Padlets</h2>
     </div>
-  </div>
-  <div>
-    <h2 class="text-3xl font-bold">Padlets of my Team</h2>
-  </div>
-  <div class="flex flex-row gap-4 flex-wrap justify-center">
-    <div class="bs-padlet-list-item"
-         *ngFor=" let padlet of padletsPrivate"
-         [padlet]="padlet" [routerLink]="padlet.id.toString()">
+    <div class="flex flex-row gap-4 flex-wrap justify-center">
+      <div class="bs-padlet-list-item"
+           *ngFor=" let padlet of padletsPrivate"
+           [padlet]="padlet" [routerLink]="padlet.id.toString()">
+      </div>
     </div>
   </div>
 
-  <div>
-    <h2>Public Padlets</h2>
+  <!-- only padlets that somebody shared with user -->
+  <div *ngIf="selectedOption == 'option2'">
+    <div>
+      <h2 class="text-3xl font-bold">Padlets of my Team</h2>
+    </div>
+    <div class="flex flex-row gap-4 flex-wrap justify-center">
+      <div class="bs-padlet-list-item"
+           *ngFor=" let padlet of padletsTeam"
+           [padlet]="padlet" [routerLink]="padlet.id.toString()">
+      </div>
+    </div>
   </div>
-  <div class="flex flex-row gap-4 flex-wrap">
-    <div class="bs-padlet-list-item"
-         *ngFor=" let padlet of padlets"
-         [padlet]="padlet" [routerLink]="padlet.id.toString()">
+  <div *ngIf="selectedOption == 'option3'">
+    <h2>Public Padlets</h2>
+    <div class="flex flex-row gap-4 flex-wrap">
+      <div class="bs-padlet-list-item"
+           *ngFor=" let padlet of padletsPublic"
+           [padlet]="padlet" [routerLink]="padlet.id.toString()">
+      </div>
     </div>
   </div>
 
 </div>
+
+
+

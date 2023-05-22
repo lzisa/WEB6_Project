@@ -26,6 +26,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 //padlets
 Route::get('padlets', [PadletController::class, 'index']);
+Route::get('padlets/public', [PadletController::class, 'getPublicPadlets']);
 Route::get('padlets/{padlet_id}', [PadletController::class, 'findByID']);
 Route::get('padlets/checkByID/{padlet_id}', [PadletController::class, 'checkByID']);
 Route::get('{user_id}/padlets', [PadletController::class, 'getPadletsOfUser']);
@@ -61,6 +62,7 @@ Route::get('padlets/{padlet_id}/entries/{entry_id}/comments/{comment_id}/user_id
 //userrights
 Route::get('userrights', [UserRightsController::class, 'index']);
 Route::get('padlets/{padlet_id}/userrights', [UserRightsController::class, 'getUserrightsOfPadlet']);
+Route::get('padlets/{user_id}/sharedPadlets', [UserRightsController::class, 'getSharedPadletRightsByUserID']);
 Route::get('padlets/{padlet_id}/userrights/{user_id}', [UserRightsController::class, 'getIfUserRightsToPadlet']);
 Route::delete('padlets/{padlet_id}/userrights/{user_id}', [UserRightsController::class, 'delete']);
 Route::post('userrights', [UserRightsController::class, 'save']);

@@ -1,10 +1,12 @@
 <header class="bg-white shadow" *ngIf="padlet">
   <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
     <h1 class="text-3xl font-bold tracking-tight text-gray-900">{{padlet.title}}
-      <button  *ngIf="authService.isLoggedIn()"
-               class="btn" [routerLink]="['../../admin', padlet.id]">Edit Padlet</button>
-      <button  *ngIf="authService.isLoggedIn()"
-               class="btn bg-primary" (click)="removePadlet()">Delete</button>
+      <button *ngIf="authService.isLoggedIn()"
+              class="btn" [routerLink]="['../../admin', padlet.id]">Edit Padlet
+      </button>
+      <button *ngIf="authService.isLoggedIn()"
+              class="btn bg-primary" (click)="removePadlet()">Delete
+      </button>
     </h1>
     <p>by {{user.name}}</p>
   </div>
@@ -22,8 +24,8 @@
 
     <div
       class="card w-96 bg-base-100 shadow-xl bs-entry-list-item"
-      *ngFor="let entry of padlet.entries" [entry]="entry"
-         [routerLink]="entry.id.toString()">
+      *ngFor="let entry of padlet.entries" [entry]="entry">
+      <!--[routerLink]="entry.id.toString()"-->
       <!-- Templating of Entries -->
     </div>
     <button class="btn" [routerLink]="'/padlets'">zurück zur Padletliste</button>

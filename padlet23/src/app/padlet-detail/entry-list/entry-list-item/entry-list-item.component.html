@@ -1,16 +1,20 @@
-<div class="card-body" *ngIf="entry">
-  <h2 class="card-title">{{entry.title}}</h2>
-  <p>{{entry.text}}</p>
-  <span>{{user.name}}</span>
-  <div class="card-actions justify-end">
-    <button class="btn bg-primary" (click)="removeEntry()">Delete</button>
-    <button class="btn" [routerLink]="['../../admin/padlets/'+ entry.padlet_id +'/entries/' +entry.id]">Edit</button>
-  </div>
+<div class="card-body" *ngIf="entry != undefined">
   <div>
-    <h3>Comments</h3>
-    <div
-      *ngFor="let comment of comments"
-      [comment] ="comment" class="bs-comment-list-item" >
+    <h2 class="card-title">{{entry.title}}</h2>
+    <p>{{entry.text}}</p>
+    <span>{{user.name}}</span>
+    <div class="card-actions justify-end">
+      <button class="btn bg-primary" (click)="removeEntry()">Delete</button>
+      <button class="btn" [routerLink]="['../../admin/padlets/'+ entry.padlet_id +'/entries/' +entry.id]">Edit</button>
+    </div>
+    <div>
+      <h3>Comments</h3>
+      <div
+        *ngFor="let comment of comments"
+        [comment]="comment" class="bs-comment-list-item">
+      </div>
+      <input #commentInput type="text" placeholder="Type here" class="input input-ghost w-full max-w-xs"
+             (keyup.enter)="createComment(entry.id, commentInput.value); commentInput.value=''"/>
     </div>
   </div>
 </div>

@@ -9,6 +9,7 @@ export class Padlet {
     public title: string,
     public is_public: boolean,
     public user_id: number,
+    public picture?: string,
     public description?: string,
     public entries?: Entry[],
 

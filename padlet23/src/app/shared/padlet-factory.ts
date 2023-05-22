@@ -2,7 +2,7 @@ import {Padlet} from "./padlet";
 
 export class PadletFactory {
   static empty(): Padlet {
-    return new Padlet(0, '', '', '', false, 0, '',
+    return new Padlet(0, '', '', '', false, 0, '', '',
       [], '');
   }
 
@@ -14,6 +14,8 @@ export class PadletFactory {
       rawPadlet.title,
       rawPadlet.is_public,
       rawPadlet.user_id,
+      rawPadlet.picture,
+      rawPadlet.description,
       rawPadlet.entries
     );
   }

@@ -25,6 +25,7 @@ class PadletsTableSeeder extends Seeder
         $padlet = new Padlet();
         $padlet->title = "Dies ist ein neues Padlet";
         $padlet->is_public = true;
+        $padlet->picture='https://img.freepik.com/free-photo/beautiful-shot-sunrise-country-road-netherlands_181624-29198.jpg?w=900&t=st=1684763331~exp=1684763931~hmac=58a296924ae9a56d5f3c097cb430a998935a51d74d99c3a159bfeb38c1234215';
 
         //get the first user
         $user = \App\Models\User::all()->first();
@@ -75,6 +76,7 @@ class PadletsTableSeeder extends Seeder
         $padlet2 = new Padlet();
         $padlet2->title = "Angular Framework Discussion";
         $padlet2->is_public = true;
+        $padlet2->picture='https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg';
         $padlet2->user()->associate($user);
         $padlet2->save();
 
@@ -116,6 +118,7 @@ class PadletsTableSeeder extends Seeder
         $padlet3->title = "Exploring Laravel Framework";
         $padlet3->is_public = true;
         $padlet3->user()->associate($user);
+        $padlet3->picture='https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/225px-Laravel.svg.png';
         $padlet3->save();
 
         $entry5 = new Entry();
@@ -173,5 +176,12 @@ class PadletsTableSeeder extends Seeder
         $rightUser3Padlet2->padlet()->associate($padlet2);
         $rightUser3Padlet2->edit = true;
         $rightUser3Padlet2->save();
+
+        $padlet4 = new Padlet();
+        $padlet4->title = "My first private Padlet";
+        $padlet4->is_public = false;
+        $padlet4->picture='https://img.freepik.com/free-photo/hand-holding-cloud-system-with-data-protection_53876-124620.jpg?w=900&t=st=1684763712~exp=1684764312~hmac=0e482d2fd1dfcdaf316b1411ea1e6967e6cf36205501a50154ebebd14936a4cb';
+        $padlet4->user()->associate($user3);
+        $padlet4->save();
     }
 }

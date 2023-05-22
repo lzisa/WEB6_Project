@@ -23,6 +23,7 @@ import {
 import {LoginComponent} from './login/login.component';
 import {AuthenticationService} from "./shared/authentication.service";
 import {TokenInterceptorService} from "./shared/token-interceptor.service";
+import { UserrightComponent } from './shared/userright/userright.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import {TokenInterceptorService} from "./shared/token-interceptor.service";
     EntryListItemComponent,
     CommentListItemComponent,
     LoginComponent,
+    UserrightComponent,
   ],
   imports: [
     BrowserModule,

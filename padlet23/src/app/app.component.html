@@ -51,9 +51,9 @@
     <!-- Person Dropdown with Links (only visible when logged in)-->
     <div class="dropdown dropdown-end" *ngIf="isLoggedIn()">
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
-        <div class="w-10 rounded-full">
+        <div class="w-10 rounded-full" *ngIf="user.picture">
           <img
-            src="https://img.freepik.com/free-photo/pretty-smiling-joyfully-female-with-fair-hair-dressed-casually-looking-with-satisfaction_176420-15187.jpg?w=900&t=st=1684743996~exp=1684744596~hmac=28c3c827efb96d251969c02e0742c487efc9c55c97acf0582a9d19fec1aa0f5b"/>
+            src="{{user.picture}}"/>
         </div>
       </label>
       <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
