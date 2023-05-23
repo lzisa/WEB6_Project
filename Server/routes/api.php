@@ -64,8 +64,9 @@ Route::get('userrights', [UserRightsController::class, 'index']);
 Route::get('padlets/{padlet_id}/userrights', [UserRightsController::class, 'getUserrightsOfPadlet']);
 Route::get('padlets/{user_id}/sharedPadlets', [UserRightsController::class, 'getSharedPadletRightsByUserID']);
 Route::get('padlets/{padlet_id}/userrights/{user_id}', [UserRightsController::class, 'getIfUserRightsToPadlet']);
-Route::delete('padlets/{padlet_id}/userrights/{user_id}', [UserRightsController::class, 'delete']);
+Route::delete('admin/{padlet_id}/userrights/{user_id}', [UserRightsController::class, 'delete']);
 Route::post('userrights', [UserRightsController::class, 'save']);
+Route::put('admin/{padlet_id}/userrights/{user_id}', [UserRightsController::class, 'update']);
 
 
 //user

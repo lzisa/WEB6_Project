@@ -67,10 +67,34 @@ class UserRightsController extends Controller
         return $userrights != null ? response()->json($userrights, 200) : response()->json(false, 200);
     }
 
-    public function update(Request $request, Userright $userrights)
+    public function update(Request $request, string $padlet_id, string $user_id): JsonResponse
     {
-        //
+        DB::beginTransaction();
+        try {
+            $attributes = [
+                'padlet_id' => $padlet_id,
+                'user_id' => $user_id,
+            ];
+
+            $userrightData = [
+                'edit' => $request->input('edit'),
+            ];
+
+            Userright::updateOrInsert($attributes, $userrightData);
+            DB::commit();
+
+            $userright = Userright::where($attributes)->first();
+            return response()->json($userright, 201);
+        } catch (\Exception $e) {
+            // rollback all queries
+            DB::rollBack();
+            return response()->json("Updating Userright failed: " . $e->getMessage(), 420);
+        }
     }
+
+
+
+
     public function delete(string $padlet_id, string $user_id): JsonResponse
     {
         $deleted = Userright::where('padlet_id', $padlet_id)

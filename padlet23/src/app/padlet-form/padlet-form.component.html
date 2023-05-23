@@ -5,10 +5,70 @@
     <label class="label">
       <span class="label-text">Name of Padlet</span>
     </label>
-    <input formControlName="title" type="text" placeholder="Type here" class="input input-bordered w-full max-w-xs"/>
+    <input formControlName="title" type="text" placeholder="Type here"
+           class="input input-bordered w-full max-w-xs"/>
     <span *ngIf="errors['title']" class="label-text-alt">{{errors['title']}}</span>
   </div>
-  <button type="submit" class="btn btn-active"
+  <div class="flex flex-col">
+    <div class="form-control w-52">
+      <label class="cursor-pointer label">
+        <span class="label-text">Public</span>
+        <input type="checkbox" class="toggle toggle-primary" formControlName="is_public"
+               [checked]="padlet.is_public"/>
+      </label>
+    </div>
+  </div>
+
+  <button class="btn btn-active"
           [disabled]="padletForm.invalid">Speichern
   </button>
+
+  <h2>Invite People</h2>
+  <div class="overflow-x-auto w-full">
+    <table class="table w-full">
+      <!-- head -->
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>E-Mail</th>
+        <th>Read</th>
+        <th>Edit</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users">
+        <td>
+          <div class="flex items-center space-x-3">
+            <div class="avatar">
+              <div class="mask mask-squircle w-12 h-12">
+                <img src="{{user.picture}}" alt="Avatar Tailwind CSS Component"/>
+              </div>
+            </div>
+            <div>
+              <div class="font-bold">{{user.name}}</div>
+            </div>
+          </div>
+        </td>
+        <td>
+          {{user.email}}
+          <br/>
+        </td>
+        <td>
+          <label>
+            <input type="checkbox" class="checkbox" [checked]="user.userrights && user.userrights[0]!=false"
+                   (change)="updateUserRights(user, $event, 'read')"/>
+          </label>
+        </td>
+        <td>
+          <label>
+            <input type="checkbox" class="checkbox" (change)="updateUserRights(user, $event, 'edit')"
+                   [checked]="user.userrights && user.userrights[0].edit === 1"
+                   [disabled]="!user.userrights"/>
+          </label>
+        </td>
+      </tr>
+      </tbody>
+
+    </table>
+  </div>
 </form>

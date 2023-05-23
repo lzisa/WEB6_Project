@@ -4,7 +4,7 @@
 <div [entry] = "entry" class="bs-rating-list-item"></div>
     <p>{{entry.text}}</p>
     <span>{{user.name}}</span>
-    <div class="card-actions justify-end">
+    <div class="card-actions justify-end" *ngIf="this.userright.edit">
       <button class="btn bg-primary" (click)="removeEntry()">Delete</button>
       <button class="btn" [routerLink]="['../../admin/padlets/'+ entry.padlet_id +'/entries/' +entry.id]">Edit</button>
     </div>

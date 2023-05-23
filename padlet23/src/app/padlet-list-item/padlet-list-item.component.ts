@@ -17,8 +17,8 @@ export class PadletListItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.padlet){
-      this.us.getSingle(this.padlet.user_id).subscribe(res =>this.owner = res);
+    if (this.padlet) {
+      this.us.getSingle(this.padlet.user_id).subscribe(res => this.owner = res);
     }
 
   }

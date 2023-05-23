@@ -11,13 +11,16 @@ class Userright extends Model
 {
     use HasFactory;
 
-    protected $fillable =['padlet_id', 'user_id', 'edit'];
+    public $incrementing = false;
+    protected $fillable = ['padlet_id', 'user_id', 'edit'];
 
-    public function user(): BelongsTo{
+    public function user(): BelongsTo
+    {
         return $this->belongsTo(User::class);
     }
 
-    public function padlet(): BelongsTo{
+    public function padlet(): BelongsTo
+    {
         return $this->belongsTo(Padlet::class);
     }
 }

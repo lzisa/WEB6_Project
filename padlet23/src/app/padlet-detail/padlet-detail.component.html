@@ -26,7 +26,7 @@
     </button>
 
     <div
-      class="card w-96 bg-base-100 shadow-xl bs-entry-list-item"
+      class="card w-96 bg-base-100 shadow-xl bs-entry-list-item" [padlet]="padlet"
       *ngFor="let entry of padlet.entries" [entry]="entry">
       <!--[routerLink]="entry.id.toString()"-->
       <!-- Templating of Entries -->

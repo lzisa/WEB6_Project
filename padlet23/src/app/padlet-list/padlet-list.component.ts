@@ -29,7 +29,8 @@ export class PadletListComponent implements OnInit {
   constructor(private ps: PadletStoreService,
               private authService: AuthenticationService,
               private userrightsService: UserrightsStoreService,
-) {
+              private us: UserStoreService
+  ) {
   }
 
   onOptionChange() {
@@ -48,10 +49,19 @@ export class PadletListComponent implements OnInit {
     let user_id = this.authService.getCurrentUserId();
     //get padlets of Owner, private or not
     this.ps.getOwnersPadlets(this.authService.getCurrentUserId())
-      .subscribe(res => this.padletsPrivate = res);
+      .subscribe(
+        res =>{
+          this.padletsPrivate = res
+        });
+
+    let user: User;
+    this.us.getSingle(user_id).subscribe(res =>  user = res);
+    this.padletsPrivate.forEach((p: Padlet)=>{
+      p.user = user;
+    });
+
     //get all public padlets
     this.ps.getPublicPadlets().subscribe(res => this.padletsPublic = res);
-
 
     //get all padlets are shared with me
     this.userrightsService.getAllSharedPadletsWithUser(user_id).subscribe(res => {
@@ -62,5 +72,17 @@ export class PadletListComponent implements OnInit {
         this.ps.getSingle(right.padlet_id).subscribe(res => this.padletsTeam.push(res));
       });
     });
+    console.log(this.padletsPrivate);
   }
+
+
+  /*  getUser() {
+      this.padlets.forEach((p: Padlet) => {
+        this.us.getSingle(p.user_id).subscribe((user: User) => {
+            p.user = user;
+          }
+        )
+      });
+    }
+    */
 }

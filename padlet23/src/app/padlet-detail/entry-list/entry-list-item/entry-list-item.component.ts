@@ -10,6 +10,10 @@ import {EntryStoreService} from "../../../shared/entry-store.service";
 import {EntryFactory} from "../../../shared/entry-factory";
 import {CommentFactory} from "../../../shared/comment-factory";
 import {AuthenticationService} from "../../../shared/authentication.service";
+import {Userright} from "../../../shared/userright";
+import {UserrightFactory} from "../../../shared/userright-factory";
+import {UserrightsStoreService} from "../../../shared/userrights-store.service";
+import {Padlet} from "../../../shared/padlet";
 
 @Component({
   selector: '.bs-entry-list-item',
@@ -18,8 +22,10 @@ import {AuthenticationService} from "../../../shared/authentication.service";
 })
 export class EntryListItemComponent implements OnInit {
   @Input() entry: Entry | undefined;
+  @Input() padlet: Padlet | undefined;
   comments: Comment[] = [];
   user: User = UserFactory.empty();
+  userright: Userright = UserrightFactory.empty();
 
   constructor(
     private route: ActivatedRoute,
@@ -27,7 +33,8 @@ export class EntryListItemComponent implements OnInit {
     private cs: CommentStoreService,
     private us: UserStoreService,
     private es: EntryStoreService,
-    private as: AuthenticationService
+    private as: AuthenticationService,
+    private ur: UserrightsStoreService
   ) {
   }
 
@@ -38,6 +45,9 @@ export class EntryListItemComponent implements OnInit {
         .subscribe(comments => {
           this.comments = comments;
         });
+    }
+    if (this.padlet){
+      this.hasEditRights();
     }
   }
 
@@ -50,6 +60,27 @@ export class EntryListItemComponent implements OnInit {
     this.cs.create(comment, padlet_id).subscribe(res => {
       this.comments.push(res);
     });
+  }
+
+  hasEditRights() {
+    if(this.padlet) {
+      //check if is logged in
+      if (this.as.isLoggedIn()) {
+        //check if user is owner of board
+
+        let check = this.ur.checkifIsOwner(this.padlet.user_id);
+        if (check) this.userright.edit = true;
+        else {
+          //check if user has Editor Rights to Padlet
+          this.ur.getUserrightsOfPadletAndUser(this.padlet.id, this.as.getCurrentUserId())
+            .subscribe(
+              (right: Userright) => {
+                this.userright = right;
+              });
+        }
+      } else
+        this.userright.edit = false;
+    }
   }
 
   getUser(id: number): void {
