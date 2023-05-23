@@ -12,6 +12,7 @@ interface Token {
 
 @Injectable()
 export class AuthenticationService {
+
   private api: string = "http://padlet23.s2010456035.student.kwmhgb.at/api/auth";
 
   constructor(private http: HttpClient) {
@@ -27,6 +28,8 @@ export class AuthenticationService {
   public getCurrentUserId() {
     return Number.parseInt(<string>sessionStorage.getItem("userId"));
   }
+
+
 
   public setSessionStorage(token: string) {
     const decodedToken = jwt_decode(token) as Token;

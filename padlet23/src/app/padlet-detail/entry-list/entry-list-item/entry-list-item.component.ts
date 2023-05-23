@@ -37,7 +37,6 @@ export class EntryListItemComponent implements OnInit {
       this.cs.getAllCommentsFromPadletFromEntry(this.entry.padlet_id, this.entry.id)
         .subscribe(comments => {
           this.comments = comments;
-
         });
     }
   }
@@ -58,6 +57,8 @@ export class EntryListItemComponent implements OnInit {
       this.user = user;
     });
   }
+
+
 
   removeEntry() {
 

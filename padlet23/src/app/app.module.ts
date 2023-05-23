@@ -24,6 +24,7 @@ import {LoginComponent} from './login/login.component';
 import {AuthenticationService} from "./shared/authentication.service";
 import {TokenInterceptorService} from "./shared/token-interceptor.service";
 import { UserrightComponent } from './shared/userright/userright.component';
+import { RatingListItemComponent } from './padlet-detail/entry-list/entry-list-item/rating-list-item/rating-list-item.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { UserrightComponent } from './shared/userright/userright.component';
     CommentListItemComponent,
     LoginComponent,
     UserrightComponent,
+    RatingListItemComponent,
   ],
   imports: [
     BrowserModule,

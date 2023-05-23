@@ -1,6 +1,7 @@
 <div class="card-body" *ngIf="entry != undefined">
   <div>
     <h2 class="card-title">{{entry.title}}</h2>
+<div [entry] = "entry" class="bs-rating-list-item"></div>
     <p>{{entry.text}}</p>
     <span>{{user.name}}</span>
     <div class="card-actions justify-end">

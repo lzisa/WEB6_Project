@@ -13,6 +13,9 @@ import {User} from "../shared/user";
 import {UserFactory} from "../shared/user-factory";
 import {UserStoreService} from "../shared/user-store.service";
 import {AuthenticationService} from "../shared/authentication.service";
+import {UserrightsStoreService} from "../shared/userrights-store.service";
+import {Userright} from "../shared/userright";
+import {UserrightFactory} from "../shared/userright-factory";
 
 
 @Component({
@@ -25,7 +28,9 @@ export class PadletDetailComponent implements OnInit {
 
   entries: Entry[] = [];
   comments: Comment[] = [];
-  user: User = UserFactory.empty();
+  owner: User = UserFactory.empty();
+  userright: Userright = UserrightFactory.empty();
+  hasEditRightsValue: boolean = false;
   editedTitle: string | undefined;
 
   constructor(
@@ -35,34 +40,58 @@ export class PadletDetailComponent implements OnInit {
     private us: UserStoreService,
     private route: ActivatedRoute,
     private router: Router,
-    public authService: AuthenticationService
+    public authService: AuthenticationService,
+    private ur: UserrightsStoreService
   ) {
   }
 
   ngOnInit() {
     const params = this.route.snapshot.params;
     let padlet_id = params['id'];
-    console.log(params);
+    this.authService.isLoggedIn();
     this.ps.getSingle(padlet_id).subscribe((p: Padlet) => {
       this.padlet = p;
-      console.log(this.padlet);
       this.getEntries(padlet_id);
-      this.getUser(padlet_id);
+      this.getOwner(this.padlet.user_id);
+      //this.hasEditRightsValue =this.checkRights.hasEditRights(this.padlet);
+      this.hasEditRights();
+    });
+
+  }
+
+  getOwner(id: number): void {
+    this.us.getSingle(id).subscribe(user => {
+      this.owner = user;
     });
   }
 
-  getUser(id: number): void {
-    this.us.getSingle(id).subscribe(user => {
-      this.user = user;
-    });
+
+  hasEditRights() {
+    //check if is logged in
+    if (this.authService.isLoggedIn()) {
+      //check if user is owner of board
+      let check = this.ur.checkifIsOwner(this.padlet.user_id);
+      if (check) this.userright.edit = true;
+      else {
+        //check if user has Editor Rights to Padlet
+        this.ur.getUserrightsOfPadletAndUser(this.padlet.id, this.authService.getCurrentUserId())
+          .subscribe(
+            (right: Userright) => {
+              this.userright = right;
+            });
+      }
+    } else
+      this.userright.edit = false;
+  }
+
+  editRight(userright: Userright) {
+    console.log(userright.edit);
+    return true;
   }
 
   getEntries(padlet_id: number): void {
-    console.log(padlet_id);
     this.es.getAllEntries(padlet_id).subscribe(entries => {
-      console.log(entries);
       if (entries) {
-        console.log(entries);
         this.padlet.entries = entries;
       }
     });

@@ -63,7 +63,7 @@ class UserRightsController extends Controller
     public function getIfUserRightsToPadlet(string $padlet_id, string $user_id):jsonResponse
     {
         $userrights = Userright::where('padlet_id', $padlet_id)
-            ->where('user_id', $user_id)->get();
+            ->where('user_id', $user_id)->first();
         return $userrights != null ? response()->json($userrights, 200) : response()->json(false, 200);
     }
 

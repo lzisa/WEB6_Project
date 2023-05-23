@@ -7,7 +7,7 @@ use App\Models\Entry;
 use App\Models\Padlet;
 use App\Models\Rating;
 use App\Models\Userright;
-use http\Client\Curl\User;
+use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -22,6 +22,30 @@ class PadletsTableSeeder extends Seeder
      */
     public function run()
     {
+        $user = new User();
+        $user->name = 'user';
+        $user->email = 'user@gmail.com';
+        $user->password = bcrypt('secret');
+        $user->picture = 'https://img.freepik.com/free-photo/young-beautiful-woman-pink-warm-sweater-natural-look-smiling-portrait-isolated-long-hair_285396-896.jpg?w=900&t=st=1684762839~exp=1684763439~hmac=bc9579fd4cecb0b5d94b6821b9d8ad8acc2f140333eb3df157746f333ea54732';
+        $user->save();
+
+        $user2 = new User();
+        $user2->name = 'hanna';
+        $user2->email = 'hanna@gmail.com';
+        $user2->password = bcrypt('secret');
+        $user2->picture='https://img.freepik.com/free-photo/portrait-beautiful-young-woman-standing-grey-wall_231208-10760.jpg?w=900&t=st=1684762881~exp=1684763481~hmac=f1850916b8ada89020803f297d09a40ead57804d63e8d38d89353314d6256882';
+        $user2->save();
+
+        $user4 = new \App\Models\User();
+        $user4->name = 'patricia';
+        $user4->email = 'patricia@gmail.com';
+        $user4->password = bcrypt('secret');
+        $user4->picture='https://img.freepik.com/free-photo/beautiful-young-girl-touching-her-face-youth-skin-care-concept_231208-13291.jpg?w=900&t=st=1684762923~exp=1684763523~hmac=a237fe3f535fc57fc6079c6e9812fa6de8d92593c43cfcb19c1656da0b7fcac1';
+        $user4->save();
+
+        /**
+         * padlets usw
+         */
         $padlet = new Padlet();
         $padlet->title = "Dies ist ein neues Padlet";
         $padlet->is_public = true;
@@ -62,14 +86,10 @@ class PadletsTableSeeder extends Seeder
 
         $rating = new Rating();
         $rating->rating = 4;
+        $rating->entry()->associate($entry3);
         $rating->user()->associate($user);
 
 
-        $rating2 = new Rating();
-        $rating2->rating = 2;
-        $rating2->user()->associate($user);
-
-        $entry2->rating()->saveMany([$rating, $rating2]);
         $padlet->save();
 
         // Create the second padlet (related to Angular)
@@ -102,6 +122,7 @@ class PadletsTableSeeder extends Seeder
         $comment4->user()->associate($user);
         $entry4->comment()->save($comment4);
 
+        /*
         $rating3 = new Rating();
         $rating3->rating = 4;
         $rating3->user()->associate($user);
@@ -111,7 +132,7 @@ class PadletsTableSeeder extends Seeder
         $rating4->rating = 5;
         $rating4->user()->associate($user);
         $entry4->rating()->save($rating4);
-
+*/
 
         // Create the third padlet (related to Laravel)
         $padlet3 = new Padlet();
@@ -152,6 +173,12 @@ class PadletsTableSeeder extends Seeder
         $rating6->rating = 4;
         $rating6->user()->associate($user);
         $entry6->rating()->save($rating6);
+
+        //check if it can be saved double -> not possible
+        $rating7 = new Rating();
+        $rating7->rating = 5;
+        $rating7->user()->associate($user);
+        $rating7->entry()->associate($rating5);
 
         $r1 = new Userright();
         $r1->user()->associate($user);

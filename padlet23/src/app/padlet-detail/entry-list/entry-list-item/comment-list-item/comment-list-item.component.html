@@ -1,9 +1,15 @@
 <div *ngIf="comment">
   <div  class="chat chat-end" *ngIf="comment.user_id == loggedinUser.id">
+    <div class="chat-image avatar">
+      <div class="w-10 rounded-full">
+        <img src="{{user.picture}}" />
+      </div>
+    </div>
     <div class="chat-header">
-      {{user.name}}
+      me
       <time class="text-xs opacity-50">{{comment.created_at}}</time>
     </div>
+
     <div class="chat-bubble">
       {{comment.text}}
     </div>
@@ -13,6 +19,11 @@
     <div class="chat-header">
       {{user.name}}
       <time class="text-xs opacity-50">{{comment.created_at}}</time>
+    </div>
+    <div class="chat-image avatar">
+      <div class="w-10 rounded-full">
+        <img src="{{user.picture}}" />
+      </div>
     </div>
     <div class="chat-bubble">
       {{comment.text}}

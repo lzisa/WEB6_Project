@@ -7,6 +7,8 @@ import {AuthenticationService} from "../shared/authentication.service";
 import {UserStoreService} from "../shared/user-store.service";
 import {UserrightsStoreService} from "../shared/userrights-store.service";
 import {Userright} from "../shared/userright";
+import {User} from "../shared/user";
+import {UserFactory} from "../shared/user-factory";
 
 @Component({
   selector: 'bs-padlet-list',
@@ -22,9 +24,12 @@ export class PadletListComponent implements OnInit {
   selectedOption: String = 'option3';
   selectedText: String = 'Public padlets';
 
+
+
   constructor(private ps: PadletStoreService,
               private authService: AuthenticationService,
-              private userrightsService: UserrightsStoreService) {
+              private userrightsService: UserrightsStoreService,
+) {
   }
 
   onOptionChange() {
@@ -46,6 +51,7 @@ export class PadletListComponent implements OnInit {
       .subscribe(res => this.padletsPrivate = res);
     //get all public padlets
     this.ps.getPublicPadlets().subscribe(res => this.padletsPublic = res);
+
 
     //get all padlets are shared with me
     this.userrightsService.getAllSharedPadletsWithUser(user_id).subscribe(res => {
