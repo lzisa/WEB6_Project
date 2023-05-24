@@ -1,9 +1,9 @@
-<div class="card w-96 bg-base-100 shadow-xl" *ngIf="padlet">
+<div class="card w-96 bg-white shadow-xl" *ngIf="padlet">
   <figure>
     <img class="h-80"
       src="{{padlet.picture}}"/>
   </figure>
-  <div class="card-body">
+  <div class="card-body bg-white">
     <div class="flex gap-8">
       <h2 class="card-title">{{padlet.title}}</h2>
       <div *ngIf="padlet.is_public" class="badge badge-primary badge-outline">public</div>

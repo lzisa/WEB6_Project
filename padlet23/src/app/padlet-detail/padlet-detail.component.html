@@ -6,7 +6,7 @@
         <button
           class="btn" [routerLink]="['../../admin', padlet.id]">Edit Padlet
         </button>
-        <button *ngIf="authService.isLoggedIn()"
+        <button *ngIf="authService.isLoggedIn() && this.authService.getCurrentUserId()===this.padlet.user_id"
                 class="btn bg-primary" (click)="removePadlet()">Delete
         </button>
       </div>

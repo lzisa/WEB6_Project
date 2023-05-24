@@ -23,7 +23,7 @@
         *ngFor="let comment of comments"
         [comment]="comment" class="bs-comment-list-item my-8">
       </div>
-      <input #commentInput type="text" placeholder="Type here"
+      <input #commentInput type="text" placeholder="Type here" *ngIf="this.as.isLoggedIn()"
              class="input input-ghost w-full my-4"
              (keyup.enter)="createComment(entry.id, commentInput.value); commentInput.value=''"/>
     </div>

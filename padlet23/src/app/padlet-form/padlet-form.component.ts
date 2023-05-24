@@ -39,7 +39,7 @@ export class PadletFormComponent implements OnInit {
     private router: Router,
     private us: UserStoreService,
     private ur: UserrightsStoreService,
-    private as: AuthenticationService
+    protected as: AuthenticationService
   ) {
     this.padletForm = this.fb.group({});
   }

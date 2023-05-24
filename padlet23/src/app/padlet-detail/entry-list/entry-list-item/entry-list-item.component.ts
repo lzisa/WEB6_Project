@@ -33,7 +33,7 @@ export class EntryListItemComponent implements OnInit {
     private cs: CommentStoreService,
     private us: UserStoreService,
     private es: EntryStoreService,
-    private as: AuthenticationService,
+    public as: AuthenticationService,
     private ur: UserrightsStoreService
   ) {
   }

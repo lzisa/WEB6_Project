@@ -1,6 +1,7 @@
 <div class="rating flex gap-4 flex-col" *ngIf="entry">
   <button [ngClass]="{'bg-red-800' : liked.rating, 'bg-secondary': !liked.rating}"
-          class="bg-red-800 mask mask-heart h-8 " (click)="toggleRating()">
+          class="bg-red-800 mask mask-heart h-8 " (click)="toggleRating()"
+  [disabled]="!this.as.isLoggedIn()">
   </button>
   <div>{{likes}} likes</div>
 </div>

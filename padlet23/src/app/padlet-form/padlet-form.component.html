@@ -22,7 +22,7 @@
   <button class="btn btn-active"
           [disabled]="padletForm.invalid">Speichern
   </button>
-  <div class="overflow-x-auto w-full" *ngIf="padlet.id!=0">
+  <div class="overflow-x-auto w-full" *ngIf="padlet.id!=0 && padlet.user_id === this.as.getCurrentUserId()">
     <h2>Manage Userrights</h2>
     <table class="table w-full">
       <!-- head -->

@@ -23,7 +23,7 @@ export class RatingListItemComponent implements OnInit {
   constructor(
     private us: UserStoreService,
     private rs: RatingStoreService,
-    private as: AuthenticationService,
+    public as: AuthenticationService,
     private router: Router,
     private route: ActivatedRoute,
     private cdr: ChangeDetectorRef
