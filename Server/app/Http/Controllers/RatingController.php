@@ -14,13 +14,19 @@ class RatingController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index():jsonResponse
+    public function index(): jsonResponse
     {
         $rating = Rating::with(['user', 'entry'])->get();
         return response()->json($rating, 200);
     }
 
-    public function getRatingsOfEntry(string $padlet_id, string $entry_id):jsonResponse
+    public function getRatingEntryUser(string $padlet_id, string $entry_id, string $user_id): jsonResponse
+    {
+        $rating = Rating::where('entry_id', $entry_id)->where('user_id', $user_id)->first();
+        return $rating != null ? response()->json($rating, 200) : response()->json(false, 200);
+    }
+
+    public function getRatingsOfEntry(string $padlet_id, string $entry_id): jsonResponse
     {
         $ratings = Rating::where('entry_id', $entry_id)->get();
         return $ratings != null ? response()->json($ratings, 200) : response()->json(false, 200);
@@ -29,22 +35,22 @@ class RatingController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
-    public function save(Request $request, string $padlet_id, string $entry_id):JsonResponse
+    public function save(Request $request, string $padlet_id, string $entry_id, string $user_id): JsonResponse
     {
         $request = $this->parseRequest($request);
         DB::beginTransaction();
 
         try {
-            if(isset($request['user_id']) && isset($request['rating']));
+            if (isset($request['rating'])) ;
             {
                 $rating = Rating::create(
                     [
-                        'user_id'=>$request['user_id'],
-                        'rating'=>$request['rating'],
-                        'entry_id'=> $entry_id
+                        'user_id' => $user_id,
+                        'rating' => $request['rating'],
+                        'entry_id' => $entry_id
                     ]
                 );
             }
@@ -61,8 +67,8 @@ class RatingController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Rating  $rating
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Rating $rating
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, string $padlet_id, string $entry_id, string $rating_id): JsonResponse
@@ -93,19 +99,18 @@ class RatingController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Rating  $rating
+     * @param \App\Models\Rating $rating
      * @return \Illuminate\Http\Response
      */
-    public function delete(string $rating_id): JsonResponse
+    public function delete(string $padlet_id, string $entry_id, string $user_id): JsonResponse
     {
-        $comment = Rating::where('id', $rating_id)->first();
-        if ($comment != null) {
-            $comment->delete();
-            return response()->json('comment (' . $rating_id . ') successfully deleted', 200);
+        $rating = Rating::where('entry_id', $entry_id)
+            ->where('user_id', $user_id)->delete();
+        if ($rating) {
+            return response()->json('rating with padlet_id (' . $padlet_id . ') and user_id (' . $user_id . ') successfully deleted', 200);
         } else
-            return response()->json('comment could not be deleted - it does not exist', 422);
+            return response()->json('rating could not be deleted - it does not exist', 422);
     }
-
 
     private function parseRequest(Request $request): Request
     {

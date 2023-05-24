@@ -33,14 +33,14 @@ class PadletsTableSeeder extends Seeder
         $user2->name = 'hanna';
         $user2->email = 'hanna@gmail.com';
         $user2->password = bcrypt('secret');
-        $user2->picture='https://img.freepik.com/free-photo/portrait-beautiful-young-woman-standing-grey-wall_231208-10760.jpg?w=900&t=st=1684762881~exp=1684763481~hmac=f1850916b8ada89020803f297d09a40ead57804d63e8d38d89353314d6256882';
+        $user2->picture = 'https://img.freepik.com/free-photo/portrait-beautiful-young-woman-standing-grey-wall_231208-10760.jpg?w=900&t=st=1684762881~exp=1684763481~hmac=f1850916b8ada89020803f297d09a40ead57804d63e8d38d89353314d6256882';
         $user2->save();
 
         $user4 = new \App\Models\User();
         $user4->name = 'patricia';
         $user4->email = 'patricia@gmail.com';
         $user4->password = bcrypt('secret');
-        $user4->picture='https://img.freepik.com/free-photo/beautiful-young-girl-touching-her-face-youth-skin-care-concept_231208-13291.jpg?w=900&t=st=1684762923~exp=1684763523~hmac=a237fe3f535fc57fc6079c6e9812fa6de8d92593c43cfcb19c1656da0b7fcac1';
+        $user4->picture = 'https://img.freepik.com/free-photo/beautiful-young-girl-touching-her-face-youth-skin-care-concept_231208-13291.jpg?w=900&t=st=1684762923~exp=1684763523~hmac=a237fe3f535fc57fc6079c6e9812fa6de8d92593c43cfcb19c1656da0b7fcac1';
         $user4->save();
 
         /**
@@ -49,7 +49,7 @@ class PadletsTableSeeder extends Seeder
         $padlet = new Padlet();
         $padlet->title = "Dies ist ein neues Padlet";
         $padlet->is_public = true;
-        $padlet->picture='https://img.freepik.com/free-photo/beautiful-shot-sunrise-country-road-netherlands_181624-29198.jpg?w=900&t=st=1684763331~exp=1684763931~hmac=58a296924ae9a56d5f3c097cb430a998935a51d74d99c3a159bfeb38c1234215';
+        $padlet->picture = 'https://img.freepik.com/free-photo/beautiful-shot-sunrise-country-road-netherlands_181624-29198.jpg?w=900&t=st=1684763331~exp=1684763931~hmac=58a296924ae9a56d5f3c097cb430a998935a51d74d99c3a159bfeb38c1234215';
 
         //get the first user
         $user = \App\Models\User::all()->first();
@@ -83,20 +83,13 @@ class PadletsTableSeeder extends Seeder
         $entry3->text = "Dies ist die Beschreibung für Eintrag 3";
         $entry3->user()->associate($user);
 
-
-        $rating = new Rating();
-        $rating->rating = 4;
-        $rating->entry()->associate($entry3);
-        $rating->user()->associate($user);
-
-
         $padlet->save();
 
         // Create the second padlet (related to Angular)
         $padlet2 = new Padlet();
         $padlet2->title = "Angular Framework Discussion";
         $padlet2->is_public = true;
-        $padlet2->picture='https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg';
+        $padlet2->picture = 'https://upload.wikimedia.org/wikipedia/commons/c/cf/Angular_full_color_logo.svg';
         $padlet2->user()->associate($user);
         $padlet2->save();
 
@@ -122,24 +115,24 @@ class PadletsTableSeeder extends Seeder
         $comment4->user()->associate($user);
         $entry4->comment()->save($comment4);
 
-        /*
+
         $rating3 = new Rating();
-        $rating3->rating = 4;
+        $rating3->rating = true;
         $rating3->user()->associate($user);
         $entry3->rating()->save($rating3);
 
         $rating4 = new Rating();
-        $rating4->rating = 5;
+        $rating4->rating = true;
         $rating4->user()->associate($user);
         $entry4->rating()->save($rating4);
-*/
+
 
         // Create the third padlet (related to Laravel)
         $padlet3 = new Padlet();
         $padlet3->title = "Exploring Laravel Framework";
         $padlet3->is_public = true;
         $padlet3->user()->associate($user);
-        $padlet3->picture='https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/225px-Laravel.svg.png';
+        $padlet3->picture = 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Laravel.svg/225px-Laravel.svg.png';
         $padlet3->save();
 
         $entry5 = new Entry();
@@ -164,21 +157,17 @@ class PadletsTableSeeder extends Seeder
         $comment6->user()->associate($user);
         $entry6->comment()->save($comment6);
 
+
         $rating5 = new Rating();
-        $rating5->rating = 5;
+        $rating5->rating = true;
         $rating5->user()->associate($user);
         $entry5->rating()->save($rating5);
 
         $rating6 = new Rating();
-        $rating6->rating = 4;
+        $rating6->rating = true;
         $rating6->user()->associate($user);
         $entry6->rating()->save($rating6);
 
-        //check if it can be saved double -> not possible
-        $rating7 = new Rating();
-        $rating7->rating = 5;
-        $rating7->user()->associate($user);
-        $rating7->entry()->associate($rating5);
 
         $r1 = new Userright();
         $r1->user()->associate($user);
@@ -207,8 +196,10 @@ class PadletsTableSeeder extends Seeder
         $padlet4 = new Padlet();
         $padlet4->title = "My first private Padlet";
         $padlet4->is_public = false;
-        $padlet4->picture='https://img.freepik.com/free-photo/hand-holding-cloud-system-with-data-protection_53876-124620.jpg?w=900&t=st=1684763712~exp=1684764312~hmac=0e482d2fd1dfcdaf316b1411ea1e6967e6cf36205501a50154ebebd14936a4cb';
+        $padlet4->picture = 'https://img.freepik.com/free-photo/hand-holding-cloud-system-with-data-protection_53876-124620.jpg?w=900&t=st=1684763712~exp=1684764312~hmac=0e482d2fd1dfcdaf316b1411ea1e6967e6cf36205501a50154ebebd14936a4cb';
         $padlet4->user()->associate($user3);
         $padlet4->save();
+
+
     }
 }

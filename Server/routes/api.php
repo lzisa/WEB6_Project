@@ -37,14 +37,15 @@ Route::get('padlets/{padlet_id}/entries', [EntryController::class, 'getEntriesOf
 Route::post('padlets/{padlet_id}/entries', [EntryController::class, 'save']);
 Route::put('padlets/{padlet_id}/entries/{entry_id}', [EntryController::class, 'update']);
 Route::get('padlets/{padlet_id}/entries/{entry_id}', [EntryController::class, 'findById']);
-Route::delete('padlets/{padlet_id}/entries/{entry_id}', [EntryController::class, 'remove']);
+Route::delete('padlets/{padlet_id}/entries/{entry_id}/{user_id}', [EntryController::class, 'remove']);
 
 //ratings
 Route::get('padlets/{padlet_id}/entries/{entry_id}/ratings', [RatingController::class, 'getRatingsOfEntry']);
+Route::get('padlets/{padlet_id}/entries/{entry_id}/rating/{user_id}', [RatingController::class, 'getRatingEntryUser']);
 Route::get('ratings', [RatingController::class, 'index']);
-Route::post('padlets/{padlet_id}/entries/{entry_id}/ratings', [RatingController::class, 'save']);
-Route::put('padlets/{padlet_id}/entries/{entry_id}/ratings/{rating_id}', [RatingController::class, 'update']);
-Route::delete('padlets/{padlet_id}/entries/{entry_id}/ratings/{ra   ting_id}', [RatingController::class, 'delete']);
+Route::post('padlets/{padlet_id}/entries/{entry_id}/ratings/{user_id}', [RatingController::class, 'save']);
+Route::put('padlets/{padlet_id}/entries/{entry_id}/ratings/{user_id}', [RatingController::class, 'update']);
+Route::delete('padlets/{padlet_id}/entries/{entry_id}/rating/{user_id}', [RatingController::class, 'delete']);
 
 //comments
 Route::get('padlets/comments', [CommentController::class, 'index']);

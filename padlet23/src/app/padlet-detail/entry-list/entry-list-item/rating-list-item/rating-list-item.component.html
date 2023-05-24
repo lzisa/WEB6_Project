@@ -1,0 +1,9 @@
+<div class="rating" *ngIf="entry">
+
+  <button [ngClass]="{'bg-red-800' : liked.rating, 'bg-white': !liked.rating}"
+          class="bg-red-800 mask mask-heart h-8 w-6" (click)="toggleRating()">
+  </button>
+  <div>likes {{likes}}</div>
+</div>
+
+
