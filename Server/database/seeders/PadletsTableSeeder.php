@@ -55,7 +55,7 @@ class PadletsTableSeeder extends Seeder
         $user = \App\Models\User::all()->first();
         $padlet->user()->associate($user);
         $padlet->save();
-
+/*
         $entry1 = new Entry();
         $entry1->title = "Senf";
         $entry1->text = "ich habe hier meinen Senf hinzuzufügen!";
@@ -84,7 +84,7 @@ class PadletsTableSeeder extends Seeder
         $entry3->user()->associate($user);
 
         $padlet->save();
-
+*/
         // Create the second padlet (related to Angular)
         $padlet2 = new Padlet();
         $padlet2->title = "Angular Framework Discussion";
@@ -136,25 +136,25 @@ class PadletsTableSeeder extends Seeder
         $padlet3->save();
 
         $entry5 = new Entry();
-        $entry5->title = "Beschreibung";
-        $entry5->text = "Laravel is a popular PHP framework known for its elegant syntax and powerful features.";
+        $entry5->title = "What is Laravel?";
+        $entry5->text = "Laravel is a popular PHP framework known for its simplicity, scalability, and extensive ecosystem. It follows the MVC architecture, offers an intuitive ORM (Eloquent), has a powerful templating engine (Blade), and includes built-in authentication, testing, and caching features. Laravel promotes clean code and provides a vibrant community and ecosystem for additional functionality.";
         $entry5->user()->associate($user);
         $padlet3->entries()->save($entry5);
 
         $entry6 = new Entry();
         $entry6->title = "how it works";
-        $entry6->text = "It follows the MVC (Model-View-Controller) architectural pattern, making development efficient.";
+        $entry6->text = "Laravel offers clean syntax, follows the MVC architecture, has a powerful command-line interface, provides an ORM for simplified database interactions, offers a flexible routing system, has an efficient templating engine, includes built-in authentication and authorization, incorporates robust security features, supports testing with PHPUnit, and benefits from a large and active community.";
         $entry6->user()->associate($user);
         $padlet3->entries()->save($entry6);
 
         $comment5 = new Comment();
         $comment5->text = "I love how Laravel simplifies database migrations and schema management.";
-        $comment5->user()->associate($user);
+        $comment5->user()->associate($user4);
         $entry5->comment()->save($comment5);
 
         $comment6 = new Comment();
         $comment6->text = "Laravel's Eloquent ORM makes working with databases a breeze.";
-        $comment6->user()->associate($user);
+        $comment6->user()->associate($user4);
         $entry6->comment()->save($comment6);
 
 
@@ -168,7 +168,6 @@ class PadletsTableSeeder extends Seeder
         $rating6->user()->associate($user);
         $entry6->rating()->save($rating6);
 
-
         $r1 = new Userright();
         $r1->user()->associate($user);
         $r1->padlet()->associate($padlet);
@@ -179,6 +178,7 @@ class PadletsTableSeeder extends Seeder
         $user3->name = 'lisa';
         $user3->email = 'lisa@gmail.com';
         $user3->password = bcrypt('secret');
+        $user3->picture = 'https://media.licdn.com/dms/image/D4D03AQGOi3appT5sKA/profile-displayphoto-shrink_800_800/0/1678305812597?e=2147483647&v=beta&t=wxfTOpf3Lgnpl4S2mNZRzUUqEvmuM1bS3KjftCU29X0';
         $user3->save();
 
         $rightUser3Padlet1 = new Userright();
@@ -201,5 +201,132 @@ class PadletsTableSeeder extends Seeder
         $padlet4->save();
 
 
+        //travel bucket list padlet
+        $padlet5 = new Padlet();
+        $padlet5->title = 'Travel Bucket List';
+        $padlet5->is_public = false;
+        $padlet5->picture ='https://img.freepik.com/fotos-kostenlos/schoener-tropischer-strand-und-meer-im-freien-in-der-paradiesinsel_74190-6839.jpg?w=900&t=st=1684944733~exp=1684945333~hmac=6c8804e1b88191a9f8eb4de26183789ae34d9da168572f19b889e6adfd3b110e';
+        $padlet5->user()->associate($user3);
+        $padlet5->save();
+
+        // Create travel destinations as entries
+        $entry7 = new Entry();
+        $entry7->title = 'Bora Bora';
+        $entry7->text = 'Bora Bora is a tropical paradise known for its crystal-clear waters and overwater bungalows.';
+        $entry7->padlet_id = $padlet5->id;
+        $entry7->user()->associate($user2);
+        $entry7->save();
+
+        $entry8 = new Entry();
+        $entry8->title = 'Santorini';
+        $entry8->text = 'Santorini is a picturesque Greek island famous for its stunning sunsets and white-washed buildings.';
+        $entry8->padlet_id = $padlet5->id;
+        $entry8->user()->associate($user2);
+        $entry8->save();
+
+        $entry9 = new Entry();
+        $entry9->title = 'Machu Picchu';
+        $entry9->text = 'Machu Picchu is an ancient Incan citadel located in the Andes Mountains of Peru.';
+        $entry9->padlet_id = $padlet5->id;
+        $entry9->user()->associate($user4);
+        $entry9->save();
+
+        // Create comments for entries
+        $comment7 = new Comment();
+        $comment7->text = 'Bora Bora looks like a dream destination!';
+        $comment7->entry_id = $entry7->id;
+        $comment7->user()->associate($user);
+        $comment7->save();
+
+        $comment8 = new Comment();
+        $comment8->text = "I've always wanted to visit Santorini. It's on my travel bucket list!";
+        $comment8->entry_id = $entry8->id;
+        $comment8->user()->associate($user3);
+        $comment8->save();
+
+        $comment9 = new Comment();
+        $comment9->text = 'Machu Picchu is an incredible archaeological site. Highly recommended!';
+        $comment9->entry_id = $entry9->id;
+        $comment9->user()->associate($user2);
+        $comment9->save();
+
+        // Create ratings for entries
+        $rating7 = new Rating();
+        $rating7->rating = true;
+        $rating7->entry_id = $entry7->id;
+        $rating7->user()->associate($user4);
+        $rating7->save();
+
+        $rating8 = new Rating();
+        $rating8->rating = true;
+        $rating8->entry_id = $entry9->id;
+        $rating8->user()->associate($user3);
+        $rating8->save();
+
+        $rating9 = new Rating();
+        $rating9->rating = false;
+        $rating9->entry_id = $entry8->id;
+        $rating9->user()->associate($user3);
+        $rating9->save();
+
+
+        //Recipe Padlet
+        $padlet10 = new Padlet();
+        $padlet10->title = 'Meal Inspirations';
+        $padlet10->is_public = true;
+        $padlet10->user()->associate($user3);
+        $padlet10->picture = 'https://img.freepik.com/fotos-kostenlos/pizza-pizza-gefuellt-mit-tomaten-salami-und-oliven_140725-1200.jpg?w=740&t=st=1684943992~exp=1684944592~hmac=6508170298ad77aebea2013fe0576ec47785bfb7163d335538168cdda0f9ec7b';
+        $padlet10->save();
+
+        $entry10 = new Entry();
+        $entry10->title = 'Spaghetti Carbonara';
+        $entry10->text = 'Classic Italian pasta dish with creamy egg sauce, pancetta, and Parmesan cheese.';
+        $entry10->padlet_id = $padlet10->id;
+        $entry10->user()->associate($user3);
+        $entry10->save();
+
+        $entry11 = new Entry();
+        $entry11->title = 'Chicken Curry';
+        $entry11->text = 'Delicious Indian curry made with tender chicken, aromatic spices, and creamy tomato sauce.';
+        $entry11->padlet_id = $padlet10->id;
+        $entry11->user()->associate($user4);
+        $entry11->save();
+
+        $entry12 = new Entry();
+        $entry12->title = 'Chocolate Chip Cookies';
+        $entry12->text = 'Classic homemade cookies loaded with chocolate chips, soft and chewy on the inside.';
+        $entry12->padlet_id = $padlet10->id;
+        $entry12->user()->associate($user3);
+        $entry12->save();
+
+        $comment10 = new Comment();
+        $comment10->text = 'I tried making the spaghetti carbonara last night, and it was absolutely delicious!';
+        $comment10->entry_id = $entry10->id;
+        $comment10->user()->associate($user2);
+        $comment10->save();
+
+        $comment11 = new Comment();
+        $comment11->text = 'Does anyone have a vegetarian version of the chicken curry recipe?';
+        $comment11->entry_id = $entry11->id;
+        $comment11->user()->associate($user2);
+        $comment11->save();
+
+        $question10 = new Comment();
+        $question10->text = 'Whats the best way to achieve a crispy texture for the chocolate chip cookies?';
+        $question10->entry_id = $entry12->id;
+        $question10->user()->associate($user2);
+        $question10->save();
+
+        $rating10 = new Rating();
+        $rating10->rating = true;
+        $rating10->entry_id = $entry10->id;
+        $rating10->user()->associate($user2);
+        $rating10->save();
+
+        $rating11 = new Rating();
+        $rating11->rating = true;
+        $rating11->entry_id = $entry11->id;
+        $rating11->user()->associate($user2);
+        $rating11->save();
     }
 }

@@ -6,41 +6,20 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16"/>
         </svg>
       </label>
-      <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-        <li>
-          <a routerLink="home" routerLinkActive="active"
-             class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">
-            Home
-          </a>
-        </li>
-        <li>
-          <a routerLink="padlets" routerLinkActive="active"
-             class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
-            Padlet Overview
-          </a>
-        </li>
-        <!--<li>
-          <a routerLink="login" routerLinkActive="active"
-             class="item">{{getLoginLabel()}}</a>
-        </li>-->
-      </ul>
     </div>
-    <a class="btn btn-ghost normal-case text-xl">ShareWall</a>
+    <a class="btn btn-ghost normal-case text-xl" routerLink="padlets" routerLinkActive="active">
+      ShareWall</a>
   </div>
-  <div class="navbar hidden lg:flex">
+  <div class="navbar-end hidden lg:flex">
     <ul class="menu menu-horizontal px-1">
-      <li>
-        <a routerLink="home" routerLinkActive="active"
-           class="bg-gray-900 text-white rounded-md px-3 py-2 text-sm font-medium" aria-current="page">
-          Home</a>
-      </li>
+      <!--
       <li>
         <a routerLink="padlets" routerLinkActive="active"
            class="text-gray-300 hover:bg-gray-700 hover:text-white rounded-md px-3 py-2 text-sm font-medium">
           Padlet Overview
         </a>
       </li>
-
+-->
       <li *ngIf="!isLoggedIn()">
         <a routerLink="login" routerLinkActive="active"
            class="item">{{getLoginLabel()}}</a>
@@ -50,6 +29,7 @@
   <div class="navbar-end">
     <!-- Person Dropdown with Links (only visible when logged in)-->
     <div class="dropdown dropdown-end" *ngIf="isLoggedIn()">
+      <div>Hi {{user.name}}</div>
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
         <div class="w-10 rounded-full" *ngIf="user.picture">
           <img
@@ -57,16 +37,6 @@
         </div>
       </label>
       <ul tabindex="0" class="menu menu-compact dropdown-content mt-3 p-2 shadow bg-base-100 rounded-box w-52">
-        <li>
-          <a class="justify-between">
-            Profile
-            <span class="badge">New</span>
-          </a>
-        </li>
-        <li *ngIf="isLoggedIn()"><a>Settings</a></li>
-        <li><a *ngIf="isLoggedIn()" routerLink="admin" routerLinkActive="active"
-               class="item">Administration</a>
-        </li>
         <li><a routerLink="login" routerLinkActive="active"
                class="item">{{getLoginLabel()}}</a>
         </li>
@@ -75,5 +45,16 @@
   </div>
 </div>
 <router-outlet></router-outlet>
+<footer class="footer p-10 bg-neutral text-neutral-content">
+  <div>
+    <img width="50" height="50" viewBox="0 0 24 24"
+         src="https://www.svgrepo.com/show/500431/share.svg"
+         fill-rule="evenodd" clip-rule="evenodd" class="fill-current"/>
 
+  </div>
+  <div>
+    <h2>ShareWall</h2>
+    <br/>Unleash the Power of Collaboration <br>Lisa Zeitlhofer
+  </div>
+</footer>
 

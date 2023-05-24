@@ -1,14 +1,24 @@
 <div class="card w-96 bg-base-100 shadow-xl" *ngIf="padlet">
   <figure>
-    <img
+    <img class="h-80"
       src="{{padlet.picture}}"/>
   </figure>
   <div class="card-body">
-    <h2 class="card-title">{{padlet.title}}</h2>
-    <p>{{padlet.description}}</p>
-    <p>{{owner.name}}</p>
+    <div class="flex gap-8">
+      <h2 class="card-title">{{padlet.title}}</h2>
+      <div *ngIf="padlet.is_public" class="badge badge-primary badge-outline">public</div>
+      <div *ngIf="!padlet.is_public" class="badge badge-primary badge-outline">private</div>
+    </div>
+    <div class="flex flex-row gap-8 mt-8">
+      <div class="avatar">
+        <div class="w-10 rounded-full">
+          <img src="{{owner.picture}}">
+        </div>
+      </div>
+      <span>{{owner.name}}</span>
+    </div>
     <div class="card-actions justify-end">
-      <a class="btn btn-primary">weiter</a>
+      <a class="btn btn-primary">more</a>
     </div>
   </div>
 </div>

@@ -15,7 +15,7 @@ return new class extends Migration {
         Schema::create('entries', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('text');
+            $table->text('text');
             $table->foreignId('padlet_id')->constrained()->onDelete('cascade');
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('title')->default('title');

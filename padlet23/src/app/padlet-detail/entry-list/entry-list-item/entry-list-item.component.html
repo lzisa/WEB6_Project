@@ -1,20 +1,30 @@
-<div class="card-body" *ngIf="entry != undefined">
+<div class="card-body bg-white" *ngIf="entry != undefined">
   <div>
-    <h2 class="card-title">{{entry.title}}</h2>
-<div [entry] = "entry" class="bs-rating-list-item"></div>
+    <div class="flex flex-row justify-between">
+      <h2 class="card-title mt-10">{{entry.title}}</h2>
+      <div [entry]="entry" class="bs-rating-list-item"></div>
+    </div>
     <p>{{entry.text}}</p>
-    <span>{{user.name}}</span>
+    <div class="flex gap-4 flex-row mt-8 float-r">
+      <div class="avatar">
+        <div class="w-6 rounded-full">
+          <img src="{{user.picture}}">
+        </div>
+      </div>
+      <span class="text-base-300">by {{user.name}}</span>
+    </div>
     <div class="card-actions justify-end" *ngIf="this.userright.edit">
       <button class="btn bg-primary" (click)="removeEntry()">Delete</button>
       <button class="btn" [routerLink]="['../../admin/padlets/'+ entry.padlet_id +'/entries/' +entry.id]">Edit</button>
     </div>
     <div>
-      <h3>Comments</h3>
+      <h3 class="card-title">Comments</h3>
       <div
         *ngFor="let comment of comments"
-        [comment]="comment" class="bs-comment-list-item">
+        [comment]="comment" class="bs-comment-list-item my-8">
       </div>
-      <input #commentInput type="text" placeholder="Type here" class="input input-ghost w-full max-w-xs"
+      <input #commentInput type="text" placeholder="Type here"
+             class="input input-ghost w-full my-4"
              (keyup.enter)="createComment(entry.id, commentInput.value); commentInput.value=''"/>
     </div>
   </div>

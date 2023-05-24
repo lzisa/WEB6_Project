@@ -1,17 +1,16 @@
-
-<div *ngIf="!isLoggedIn()">
+<!--<div *ngIf="!isLoggedIn()">
   <h1>Login</h1>
   <form class="ui large form" [formGroup]="loginForm"
         (ngSubmit)="login()">
     <div class="field">
       <label>E-Mail</label>
-      <input type="email" id="username" formControlName="username" class="input input-bordered w-full max-w-xs" >
+      <input type="email" formControlName="username" class="input input-bordered w-full max-w-xs">
       <label class="label">
         <span *ngIf="loginForm.get('username')?.invalid &&
           (loginForm.get('username')?.dirty ||
           loginForm.get('username')?.touched) &&
           loginForm.get('username')?.hasError('required')"
-             class="label-text-alt">
+              class="label-text-alt">
           Benutzername ist verpflichtend
         </span>
       </label>
@@ -43,4 +42,83 @@
   <button type="button" class="ui button"
           (click)="logout()">Logout
   </button>
+</div>
+-->
+<!-- styled version -->
+<div *ngIf="!isLoggedIn()" class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm">
+    <img class="mx-auto h-10 w-auto" src="https://www.svgrepo.com/show/500431/share.svg" alt="ShareWall">
+    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">Sign in to your account</h2>
+  </div>
+
+  <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+    <form class="space-y-6" [formGroup]="loginForm" (ngSubmit)="login()">
+      <!-- username -->
+      <div>
+        <label for="username" class="block text-sm font-medium leading-6 text-gray-900">Email address</label>
+        <div class="mt-2">
+          <input autocomplete="email" required id="username" formControlName="username"
+                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+        </div>
+        <label class="label">
+        <span *ngIf="loginForm.get('username')?.invalid &&
+          (loginForm.get('username')?.dirty ||
+          loginForm.get('username')?.touched) &&
+          loginForm.get('username')?.hasError('required')"
+              class="label-text-alt">
+          Username is mandatory
+        </span>
+        </label>
+        <div *ngIf="loginForm.get('username')?.invalid &&
+      (loginForm.get('username')?.dirty ||
+      loginForm.get('username')?.touched) &&
+      loginForm.get('username')?.hasError('email')"
+             class="ui negative message">
+          E-Mail Format überprüfen
+        </div>
+      </div>
+
+      <!-- password -->
+      <div>
+        <div class="flex items-center justify-between">
+          <label for="password" class="block text-sm font-medium leading-6 text-gray-900">Password</label>
+
+        </div>
+        <div class="mt-2">
+          <input type="password" formControlName="password" id="password" name="password" type="password"
+                 autocomplete="current-password" required
+                 class="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset
+                 ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6">
+        </div>
+        <div *ngIf="loginForm.get('password')?.invalid &&
+      (loginForm.get('password')?.dirty ||
+      loginForm.get('password')?.touched)"
+             class="ui negative message">
+          Passwort ist verpflichtend
+        </div>
+      </div>
+
+      <div>
+        <button type="submit" [disabled]="loginForm.invalid"
+                class="flex w-full justify-center rounded-md bg-black px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+          Sign in
+        </button>
+      </div>
+    </form>
+  </div>
+
+</div>
+<div *ngIf="isLoggedIn()" class="my-20 flex min-h-full flex-col justify-center px-6 py-12 lg:px-8 place-content-center">
+  <div class="sm:mx-auto sm:w-full sm:max-w-sm place-content-center" >
+    <img class="mx-auto h-10 w-auto" src="https://www.svgrepo.com/show/500431/share.svg" alt="ShareWall">
+    <h2 class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
+      Do you really want to log out?
+    </h2>
+    <div class="flex justify-center my-8">
+      <button class="btn btn-active" (click)="logout()">
+        Logout
+      </button>
+    </div>
+
+  </div>
 </div>

@@ -9,8 +9,7 @@ import {EntryFormComponent} from "./entry-form/entry-form.component";
 import {LoginComponent} from "./login/login.component";
 
 const routes: Routes = [
-  {path: '', redirectTo: 'home', pathMatch: 'full'},
-  {path: 'home', component: HomeComponent},
+  {path: '', redirectTo: 'padlets', pathMatch: 'full'},
   {path: 'padlets', component: PadletListComponent},
   {path: 'padlets/:id', component: PadletDetailComponent},
   {path: 'admin/:id', component: PadletFormComponent},

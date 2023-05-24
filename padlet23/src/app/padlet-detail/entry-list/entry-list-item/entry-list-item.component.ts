@@ -92,7 +92,6 @@ export class EntryListItemComponent implements OnInit {
 
 
   removeEntry() {
-
     if (this.entry) {
       console.log(this.entry.id);
       console.log(this.entry.padlet_id);

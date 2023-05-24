@@ -17,7 +17,7 @@ export class CommentListItemComponent implements OnInit {
   @Input() comment: Comment | undefined;
 
   user: User = UserFactory.empty();
-  loggedinUser: User= UserFactory.empty();
+  loggedinUser: User = UserFactory.empty();
 
   constructor(
     private route: ActivatedRoute,
@@ -27,12 +27,24 @@ export class CommentListItemComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.comment){
+    if (this.comment) {
       this.getUser(this.comment.user_id);
       //get logged in User
-      this.loggedinUser.id=this.as.getCurrentUserId()
+      this.loggedinUser.id = this.as.getCurrentUserId();
+      this.formatDate();
     }
   }
+
+  formatDate() {
+    if (this.comment) {
+      const date = new Date(this.comment.created_at);
+      const day = date.getDate();
+      const month = date.getMonth() + 1;
+      const year = date.getFullYear();
+      this.comment.created_at = `${day < 10 ? '0' + day : day}.${month < 10 ? '0' + month : month}.${year}`;
+    }
+  }
+
 
   getUser(id: number): void {
     this.us.getSingle(id).subscribe(user => {
