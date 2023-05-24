@@ -7,15 +7,16 @@ import {PadletDetailComponent} from "./padlet-detail/padlet-detail.component";
 import {PadletFormComponent} from "./padlet-form/padlet-form.component";
 import {EntryFormComponent} from "./entry-form/entry-form.component";
 import {LoginComponent} from "./login/login.component";
+import {CanNavigateToAdminGuard} from "./can-navigate-to-admin.guard";
 
 const routes: Routes = [
   {path: '', redirectTo: 'padlets', pathMatch: 'full'},
   {path: 'padlets', component: PadletListComponent},
   {path: 'padlets/:id', component: PadletDetailComponent},
-  {path: 'admin/:id', component: PadletFormComponent},
-  {path: 'admin', component: PadletFormComponent},
-  {path: 'admin/padlets/:padlet_id/entries/:entry_id', component: EntryFormComponent},
-  {path: 'admin/padlets/:padlet_id/entries', component: EntryFormComponent},
+  {path: 'admin/:id', component: PadletFormComponent, canActivate:[CanNavigateToAdminGuard]},
+  {path: 'admin', component: PadletFormComponent, canActivate:[CanNavigateToAdminGuard]},
+  {path: 'admin/padlets/:padlet_id/entries/:entry_id', component: EntryFormComponent,  canActivate:[CanNavigateToAdminGuard]},
+  {path: 'admin/padlets/:padlet_id/entries', component: EntryFormComponent, canActivate:[CanNavigateToAdminGuard]},
   {path: 'padlets/:padlet_id/:entry_id', component: HomeComponent},
   {path: 'login', component: LoginComponent},
 ];
@@ -23,7 +24,7 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: []
+  providers: [CanNavigateToAdminGuard]
 })
 export class AppRoutingModule {
 }
