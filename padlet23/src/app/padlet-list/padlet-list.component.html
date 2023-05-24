@@ -13,7 +13,7 @@
             <option value="option3">Public Padlets</option>
           </select>
         </div>
-        <button class="btn" routerLink="./../admin" routerLinkActive="active">
+        <button *ngIf="this.authService.isLoggedIn()" class="btn" routerLink="./../admin" routerLinkActive="active">
           Add New Padlet
         </button>
       </div>
@@ -26,7 +26,10 @@
   <!-- only padlets created by user logged in -->
   <div *ngIf="selectedOption == 'option1'" class="flex justify-center mx-6 my-6 flex-wrap">
     <div class="grid grid-flow-row ">
-      <div class="flex flex-wrap gap-10 justify-evenly">
+      <div *ngIf="!this.authService.isLoggedIn()">
+        please log in to see your own padlets
+      </div>
+      <div class="flex flex-wrap gap-10 justify-evenly" *ngIf="this.authService.isLoggedIn()">
         <div class="bs-padlet-list-item"
              *ngFor=" let padlet of padletsPrivate"
              [padlet]="padlet" [routerLink]="padlet.id.toString()">
@@ -38,7 +41,11 @@
     <!-- only padlets that somebody shared with user -->
     <div *ngIf="selectedOption == 'option2'" class="flex justify-center mx-6 my-6 flex-wrap">
       <div class="grid grid-flow-row">
-        <div class="flex flex-wrap gap-10 justify-evenly">
+        <div *ngIf="!this.authService.isLoggedIn()">
+          please log in to see your team padlets
+        </div>
+        <div class="flex flex-wrap gap-10 justify-evenly" *ngIf="this.authService.isLoggedIn()">
+
           <div class="bs-padlet-list-item"
                *ngFor=" let padlet of padletsTeam"
                [padlet]="padlet" [routerLink]="padlet.id.toString()">

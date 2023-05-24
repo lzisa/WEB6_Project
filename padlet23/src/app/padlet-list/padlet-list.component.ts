@@ -27,7 +27,7 @@ export class PadletListComponent implements OnInit {
 
 
   constructor(private ps: PadletStoreService,
-              private authService: AuthenticationService,
+              public authService: AuthenticationService,
               private userrightsService: UserrightsStoreService,
               private us: UserStoreService
   ) {
@@ -74,15 +74,4 @@ export class PadletListComponent implements OnInit {
     });
     console.log(this.padletsPrivate);
   }
-
-
-  /*  getUser() {
-      this.padlets.forEach((p: Padlet) => {
-        this.us.getSingle(p.user_id).subscribe((user: User) => {
-            p.user = user;
-          }
-        )
-      });
-    }
-    */
 }

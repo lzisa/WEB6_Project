@@ -19,15 +19,18 @@
           Padlet Overview
         </a>
       </li>
--->
+
       <li *ngIf="!isLoggedIn()">
         <a routerLink="login" routerLinkActive="active"
            class="item">{{getLoginLabel()}}</a>
       </li>
+      -->
     </ul>
   </div>
   <div class="navbar-end">
     <!-- Person Dropdown with Links (only visible when logged in)-->
+      <a routerLink="login" routerLinkActive="active" *ngIf="!isLoggedIn()"
+         class="item">{{getLoginLabel()}}</a>
     <div class="dropdown dropdown-end" *ngIf="isLoggedIn()">
       <div>Hi {{user.name}}</div>
       <label tabindex="0" class="btn btn-ghost btn-circle avatar">
